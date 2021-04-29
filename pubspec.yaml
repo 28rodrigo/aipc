@@ -50,6 +50,11 @@ flutter:
     - assets/face.png
     - assets/lupa.png
     - assets/plus.png
+    - assets/settings.png
+    - assets/sos.png
+    - assets/teclado.png
+    - assets/contactos.png
+    - assets/quim.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

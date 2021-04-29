@@ -1,3 +1,4 @@
+import 'package:aipc/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,107 +19,161 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class ContactsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double deviceWidth = MediaQuery.of(context).size.width;
+    double deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Contactos'),
+        leading: Container(
+          decoration: new BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            image: new DecorationImage(
+              image: ExactAssetImage('assets/settings.png'),
+              fit: BoxFit.contain,
+            ),
+          ),
+          width: 45,
+          height: 10,
+        ),
+        actions: [
+          Container(
+            decoration: new BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: new DecorationImage(
+                image: ExactAssetImage('assets/settings.png'),
+                fit: BoxFit.contain,
+              ),
+            ),
+            width: 45,
+            height: 10,
+          ),
+        ],
+        title: Text(
+          "Contactos",
+          style: TextStyle(fontSize: 30),
+        ),
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    decoration: new BoxDecoration(
-                      color: Colors.blue,
-                      image: new DecorationImage(
-                        image: ExactAssetImage('assets/face.png'),
-                        fit: BoxFit.fitHeight,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      decoration: new BoxDecoration(
+                        color: Colors.blue,
+                        border: Border.all(width: 3, color: Colors.black),
+                        borderRadius: BorderRadius.circular(15),
+                        image: new DecorationImage(
+                          image: ExactAssetImage('assets/quim.png'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
+                      width: deviceWidth * 0.45,
+                      height: deviceHeight * 0.25,
                     ),
-                    width: 150,
-                    height: 150,
-                  ),
-                  Container(
-                    decoration: new BoxDecoration(
-                      color: Colors.blue,
-                      image: new DecorationImage(
-                        image: ExactAssetImage('assets/face.png'),
-                        fit: BoxFit.fitHeight,
+                    Container(
+                      padding: EdgeInsets.only(top: 5),
+                      child: Text(
+                        "Quim",
+                        style: TextStyle(
+                            fontSize: deviceWidth * 0.085,
+                            fontWeight: FontWeight.bold),
                       ),
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      decoration: new BoxDecoration(
+                        color: Colors.blue,
+                        border: Border.all(width: 3, color: Colors.black),
+                        borderRadius: BorderRadius.circular(15),
+                        image: new DecorationImage(
+                          image: ExactAssetImage('assets/quim.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      width: deviceWidth * 0.45,
+                      height: deviceHeight * 0.25,
                     ),
-                    width: 150,
-                    height: 150,
-                  ),
-                ],
-              ),
+                    Container(
+                      padding: EdgeInsets.only(top: 5),
+                      child: Text(
+                        "Quim",
+                        style: TextStyle(
+                            fontSize: deviceWidth * 0.085,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    decoration: new BoxDecoration(
-                      color: Colors.blue,
-                      image: new DecorationImage(
-                        image: ExactAssetImage('assets/face.png'),
-                        fit: BoxFit.fitHeight,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      decoration: new BoxDecoration(
+                        color: Colors.blue,
+                        border: Border.all(width: 3, color: Colors.black),
+                        borderRadius: BorderRadius.circular(15),
+                        image: new DecorationImage(
+                          image: ExactAssetImage('assets/quim.png'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
+                      width: deviceWidth * 0.45,
+                      height: deviceHeight * 0.25,
                     ),
-                    width: 150,
-                    height: 150,
-                  ),
-                  Container(
-                    decoration: new BoxDecoration(
-                      color: Colors.blue,
-                      image: new DecorationImage(
-                        image: ExactAssetImage('assets/face.png'),
-                        fit: BoxFit.fitHeight,
+                    Container(
+                      padding: EdgeInsets.only(top: 5),
+                      child: Text(
+                        "Quim",
+                        style: TextStyle(
+                            fontSize: deviceWidth * 0.085,
+                            fontWeight: FontWeight.bold),
                       ),
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      decoration: new BoxDecoration(
+                        color: Colors.blue,
+                        border: Border.all(width: 3, color: Colors.black),
+                        borderRadius: BorderRadius.circular(15),
+                        image: new DecorationImage(
+                          image: ExactAssetImage('assets/quim.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      width: deviceWidth * 0.45,
+                      height: deviceHeight * 0.25,
                     ),
-                    width: 150,
-                    height: 150,
-                  ),
-                ],
-              ),
+                    Container(
+                      padding: EdgeInsets.only(top: 5),
+                      child: Text(
+                        "Quim",
+                        style: TextStyle(
+                            fontSize: deviceWidth * 0.085,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    decoration: new BoxDecoration(
-                      color: Colors.blue,
-                      image: new DecorationImage(
-                        image: ExactAssetImage('assets/face.png'),
-                        fit: BoxFit.fitHeight,
-                      ),
-                    ),
-                    width: 150,
-                    height: 150,
-                  ),
-                  Container(
-                    decoration: new BoxDecoration(
-                      color: Colors.blue,
-                      image: new DecorationImage(
-                        image: ExactAssetImage('assets/face.png'),
-                        fit: BoxFit.fitHeight,
-                      ),
-                    ),
-                    width: 150,
-                    height: 150,
-                  ),
-                ],
-              ),
-            )
           ],
         ),
       ),
