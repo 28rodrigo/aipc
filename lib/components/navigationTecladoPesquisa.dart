@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
-class navigationTeclado extends StatelessWidget {
+class navigationTecladoPesquisa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -10,7 +10,7 @@ class navigationTeclado extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: deviceWidth * 0.33,
+          width: deviceWidth * 0.5,
           height: deviceHeight * 0.1,
           decoration: BoxDecoration(
             border: Border.all(width: 2, color: Colors.black),
@@ -19,7 +19,7 @@ class navigationTeclado extends StatelessWidget {
           child: TextButton(
             style: ButtonStyle(alignment: Alignment.topCenter),
             child: Icon(
-              Icons.check_circle_outline_outlined,
+              Icons.call,
               size: 70,
               color: Colors.green,
             ),
@@ -27,7 +27,7 @@ class navigationTeclado extends StatelessWidget {
           ),
         ),
         Container(
-            width: deviceWidth * 0.33,
+            width: deviceWidth * 0.5,
             height: deviceHeight * 0.1,
             decoration: BoxDecoration(
                 border: Border.all(width: 2, color: Colors.black),
@@ -38,21 +38,6 @@ class navigationTeclado extends StatelessWidget {
                 Icons.cancel,
                 size: 70,
                 color: Colors.red[800],
-              ),
-              onPressed: () {},
-            )),
-        Container(
-            width: deviceWidth * 0.34,
-            height: deviceHeight * 0.1,
-            decoration: BoxDecoration(
-                border: Border.all(width: 2, color: Colors.black),
-                color: Theme.of(context).primaryColorDark),
-            child: TextButton(
-              style: ButtonStyle(alignment: Alignment.topCenter),
-              child: Icon(
-                Icons.mic,
-                size: 70,
-                color: Colors.black,
               ),
               onPressed: () {},
             )),

@@ -8,6 +8,7 @@ class ContactsPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          backgroundColor: Theme.of(context).primaryColorDark,
           title: Text(
             "Contactos",
             style: TextStyle(fontSize: 40),

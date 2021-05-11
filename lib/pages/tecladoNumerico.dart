@@ -1,8 +1,8 @@
-import 'package:aipc/components/Navigation.dart';
+import 'package:aipc/components/navigationTecladoPesquisa.dart';
 import 'package:aipc/components/tecladoItem.dart';
 import 'package:flutter/material.dart';
 
-class TecladoPesquisaPage extends StatelessWidget {
+class TecladoNumericoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -13,13 +13,13 @@ class TecladoPesquisaPage extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Theme.of(context).primaryColorDark,
           title: Text(
-            "Pesquisa",
+            "Teclado",
             style: TextStyle(fontSize: 40),
           ),
         ),
         body: Center(
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               width: deviceWidth * 0.95,
@@ -36,29 +36,37 @@ class TecladoPesquisaPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TecladoItem(text: "A"),
-                TecladoItem(text: "B"),
-                TecladoItem(text: "C")
+                TecladoItem(text: "1"),
+                TecladoItem(text: "2"),
+                TecladoItem(text: "3")
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TecladoItem(text: "D"),
-                TecladoItem(text: "E"),
-                TecladoItem(text: "F")
+                TecladoItem(text: "4"),
+                TecladoItem(text: "5"),
+                TecladoItem(text: "6")
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TecladoItem(text: "G"),
-                TecladoItem(text: "H"),
-                TecladoItem(text: "I")
+                TecladoItem(text: "7"),
+                TecladoItem(text: "8"),
+                TecladoItem(text: "9")
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TecladoItem(text: "*"),
+                TecladoItem(text: "0"),
+                TecladoItem(text: "#")
+              ],
+            )
           ],
         )),
-        bottomNavigationBar: BottomAppBar(child: navButtons()));
+        bottomNavigationBar: BottomAppBar(child: navigationTecladoPesquisa()));
   }
 }
