@@ -1,3 +1,7 @@
+import 'package:aipc/pages/accessSettings.dart';
+import 'package:aipc/pages/chamadasnaoatendidas.dart';
+import 'package:aipc/pages/contactos.dart';
+import 'package:aipc/pages/tecladoNumerico.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -21,7 +25,10 @@ class HomePage extends StatelessWidget {
                 Icons.settings,
                 size: deviceHeight * 0.04,
               ),
-              onPressed: () {}),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AccessSettings()));
+              }),
         ],
       ),
       body: Center(
@@ -146,7 +153,12 @@ class HomePage extends StatelessWidget {
                   primary: Colors.grey[200],
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15))),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChamadasNaoAtendidasPage()));
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -190,7 +202,12 @@ class HomePage extends StatelessWidget {
                         primary: Theme.of(context).primaryColorDark,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TecladoNumericoPage()));
+                    },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -222,7 +239,12 @@ class HomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(18),
                       border: Border.all(width: 3, color: Colors.black)),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ContactsPage()));
+                    },
                     style: ElevatedButton.styleFrom(
                         primary: Theme.of(context).primaryColorDark,
                         shape: RoundedRectangleBorder(

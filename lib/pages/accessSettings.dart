@@ -1,3 +1,4 @@
+import 'package:aipc/pages/settings.dart';
 import 'package:flutter/material.dart';
 
 class AccessSettings extends StatelessWidget {
@@ -34,7 +35,10 @@ class AccessSettings extends StatelessWidget {
               ),
             ),
             TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SettingsPage()));
+                },
                 style: ButtonStyle(alignment: Alignment.topCenter),
                 child: Container(
                   alignment: Alignment.center,
@@ -53,7 +57,9 @@ class AccessSettings extends StatelessWidget {
                   ),
                 )),
             TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 child: Container(
                   alignment: Alignment.center,
                   width: deviceWidth * 0.8,

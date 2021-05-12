@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
 class navigationTecladoPesquisa extends StatelessWidget {
+  final void Function() goBack;
+
+  navigationTecladoPesquisa({@required this.goBack});
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -17,7 +20,6 @@ class navigationTecladoPesquisa extends StatelessWidget {
             color: Theme.of(context).primaryColorDark,
           ),
           child: TextButton(
-            style: ButtonStyle(alignment: Alignment.topCenter),
             child: Icon(
               Icons.call,
               size: 70,
@@ -39,7 +41,7 @@ class navigationTecladoPesquisa extends StatelessWidget {
                 size: 70,
                 color: Colors.red[800],
               ),
-              onPressed: () {},
+              onPressed: goBack,
             )),
       ],
     );

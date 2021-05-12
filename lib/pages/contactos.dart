@@ -1,4 +1,5 @@
 import 'package:aipc/components/Navigation.dart';
+import 'package:aipc/components/contactsitems.dart';
 import 'package:flutter/material.dart';
 import 'package:aipc/components/Contacts_Item.dart';
 
@@ -21,18 +22,23 @@ class ContactsPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ContactsItem(),
-                  ContactsItem(),
+                  ContactsItemVarios(itemType: 1),
+                  ContactsItemVarios(itemType: 2),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [ContactsItem(), ContactsItem()],
+                children: [ContactsItemVarios(itemType: 3), ContactsItem()],
               ),
             ],
           ),
         ),
-        bottomNavigationBar:
-            BottomAppBar(color: Colors.white, child: navButtons()));
+        bottomNavigationBar: BottomAppBar(
+            color: Colors.white,
+            child: navButtons(
+              goBack: () {
+                Navigator.pop(context);
+              },
+            )));
   }
 }

@@ -1,10 +1,13 @@
 import 'package:aipc/components/backNavigation.dart';
 import 'package:flutter/material.dart';
 
-class CriarContacto extends StatelessWidget {
+class EditarContactoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final myController = TextEditingController();
+    final myControllerNome = TextEditingController();
+    myControllerNome.text = "Quim";
+    final myControllerNumero = TextEditingController();
+    myControllerNumero.text = "919191919";
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -12,7 +15,7 @@ class CriarContacto extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Theme.of(context).primaryColorDark,
           title: Text(
-            "Criar Contacto",
+            "Editar Contacto",
             style: TextStyle(fontSize: 40),
           ),
         ),
@@ -24,14 +27,20 @@ class CriarContacto extends StatelessWidget {
                 width: deviceWidth * 0.55,
                 height: deviceWidth * 0.55,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.black, width: 2)),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.black, width: 2),
+                  image: new DecorationImage(
+                    image: ExactAssetImage('assets/quim.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                alignment: Alignment.topRight,
                 child: TextButton(
                   onPressed: () {},
                   child: Icon(
-                    Icons.person_add_alt_1_sharp,
-                    size: deviceHeight * 0.2,
-                    color: Colors.black,
+                    Icons.edit,
+                    size: deviceHeight * 0.08,
+                    color: Colors.amber,
                   ),
                 ),
               ),
@@ -52,7 +61,7 @@ class CriarContacto extends StatelessWidget {
                       children: [
                         TextField(
                           textAlign: TextAlign.center,
-                          controller: myController,
+                          controller: myControllerNome,
                           enabled: false,
                           decoration: InputDecoration(border: InputBorder.none),
                           style: TextStyle(
@@ -79,7 +88,7 @@ class CriarContacto extends StatelessWidget {
                       children: [
                         TextField(
                           textAlign: TextAlign.center,
-                          controller: myController,
+                          controller: myControllerNumero,
                           enabled: false,
                           decoration: InputDecoration(border: InputBorder.none),
                           style: TextStyle(
@@ -93,9 +102,7 @@ class CriarContacto extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
-            child: BackNavigation(
-          goBack: () {},
-        )));
+        bottomNavigationBar:
+            BottomAppBar(child: BackNavigation(goBack: () {})));
   }
 }

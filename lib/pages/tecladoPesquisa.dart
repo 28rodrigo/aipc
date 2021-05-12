@@ -36,29 +36,35 @@ class TecladoPesquisaPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TecladoItem(text: "A"),
-                TecladoItem(text: "B"),
-                TecladoItem(text: "C")
+                TecladoItem(
+                  text: "A",
+                  width: deviceWidth * 0.28,
+                ),
+                TecladoItem(text: "B", width: deviceWidth * 0.28),
+                TecladoItem(text: "C", width: deviceWidth * 0.28)
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TecladoItem(text: "D"),
-                TecladoItem(text: "E"),
-                TecladoItem(text: "F")
+                TecladoItem(text: "D", width: deviceWidth * 0.28),
+                TecladoItem(text: "E", width: deviceWidth * 0.28),
+                TecladoItem(text: "F", width: deviceWidth * 0.28)
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TecladoItem(text: "G"),
-                TecladoItem(text: "H"),
-                TecladoItem(text: "I")
+                TecladoItem(text: "G", width: deviceWidth * 0.28),
+                TecladoItem(text: "H", width: deviceWidth * 0.28),
+                TecladoItem(text: "I", width: deviceWidth * 0.28)
               ],
             ),
           ],
         )),
-        bottomNavigationBar: BottomAppBar(child: navButtons()));
+        bottomNavigationBar: BottomAppBar(
+            child: navButtons(
+          goBack: () {},
+        )));
   }
 }

@@ -17,15 +17,15 @@ class _TecladoItemState extends State<TecladoItem> {
     return TextButton(
       onPressed: () {},
       child: Container(
-        alignment: Alignment.center,
-        height: deviceHeight * 0.16,
+        alignment: Alignment.topCenter,
+        height: deviceHeight * 0.14,
         width: widget.width,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 2),
             borderRadius: BorderRadius.circular(10)),
         child: Text(
           widget.text,
-          style: TextStyle(fontSize: deviceWidth * 0.30, color: Colors.black),
+          style: TextStyle(fontSize: deviceWidth * 0.28, color: Colors.black),
         ),
       ),
     );

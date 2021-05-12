@@ -36,37 +36,41 @@ class TecladoNumericoPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TecladoItem(text: "1"),
-                TecladoItem(text: "2"),
-                TecladoItem(text: "3")
+                TecladoItem(text: "1", width: deviceWidth * 0.29),
+                TecladoItem(text: "2", width: deviceWidth * 0.29),
+                TecladoItem(text: "3", width: deviceWidth * 0.29)
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TecladoItem(text: "4"),
-                TecladoItem(text: "5"),
-                TecladoItem(text: "6")
+                TecladoItem(text: "4", width: deviceWidth * 0.29),
+                TecladoItem(text: "5", width: deviceWidth * 0.29),
+                TecladoItem(text: "6", width: deviceWidth * 0.29)
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TecladoItem(text: "7"),
-                TecladoItem(text: "8"),
-                TecladoItem(text: "9")
+                TecladoItem(text: "7", width: deviceWidth * 0.29),
+                TecladoItem(text: "8", width: deviceWidth * 0.29),
+                TecladoItem(text: "9", width: deviceWidth * 0.29)
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TecladoItem(text: "*"),
-                TecladoItem(text: "0"),
-                TecladoItem(text: "#")
+                TecladoItem(text: "*", width: deviceWidth * 0.29),
+                TecladoItem(text: "0", width: deviceWidth * 0.29),
+                TecladoItem(text: "#", width: deviceWidth * 0.29)
               ],
             )
           ],
         )),
-        bottomNavigationBar: BottomAppBar(child: navigationTecladoPesquisa()));
+        bottomNavigationBar: BottomAppBar(child: navigationTecladoPesquisa(
+          goBack: () {
+            Navigator.pop(context);
+          },
+        )));
   }
 }

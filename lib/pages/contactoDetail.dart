@@ -92,6 +92,9 @@ class ContactoDetailsPage extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomAppBar(child: backNavigation()));
+        bottomNavigationBar: BottomAppBar(
+            child: BackNavigation(
+          goBack: () {},
+        )));
   }
 }
