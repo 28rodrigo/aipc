@@ -62,9 +62,10 @@ class TecladoPesquisaPage extends StatelessWidget {
             ),
           ],
         )),
-        bottomNavigationBar: BottomAppBar(
-            child: navButtons(
-          goBack: () {},
+        bottomNavigationBar: BottomAppBar(child: navButtons(
+          goBack: () {
+            Navigator.pop(context);
+          },
         )));
   }
 }

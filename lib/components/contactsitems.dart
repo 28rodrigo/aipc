@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class ContactsItemVarios extends StatelessWidget {
   final int itemType;
-
-  ContactsItemVarios({@required this.itemType});
+  final void Function() onClick;
+  ContactsItemVarios({@required this.itemType, @required this.onClick});
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -11,20 +11,24 @@ class ContactsItemVarios extends StatelessWidget {
     if (itemType == 1) {
       return Column(
         children: [
-          Container(
-            decoration: new BoxDecoration(
-              border: Border.all(width: 3, color: Colors.black),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            width: deviceWidth * 0.48,
-            height: deviceHeight * 0.25,
-            child: Icon(
-              Icons.add_call,
-              size: deviceWidth * 0.3,
+          TextButton(
+            onPressed: onClick,
+            child: Container(
+              decoration: new BoxDecoration(
+                border: Border.all(width: 3, color: Colors.black),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              width: deviceWidth * 0.45,
+              height: deviceHeight * 0.24,
+              child: Icon(
+                Icons.add_call,
+                size: deviceWidth * 0.3,
+                color: Colors.black,
+              ),
             ),
           ),
           Container(
-              width: deviceWidth * 0.48,
+              width: deviceWidth * 0.45,
               height: deviceHeight * 0.1,
               decoration: new BoxDecoration(
                 color: Colors.blue,
@@ -45,20 +49,24 @@ class ContactsItemVarios extends StatelessWidget {
     } else if (itemType == 2) {
       return Column(
         children: [
-          Container(
-            decoration: new BoxDecoration(
-              border: Border.all(width: 3, color: Colors.black),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            width: deviceWidth * 0.48,
-            height: deviceHeight * 0.25,
-            child: Icon(
-              Icons.search,
-              size: deviceWidth * 0.3,
+          TextButton(
+            onPressed: onClick,
+            child: Container(
+              decoration: new BoxDecoration(
+                border: Border.all(width: 3, color: Colors.black),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              width: deviceWidth * 0.45,
+              height: deviceHeight * 0.24,
+              child: Icon(
+                Icons.search,
+                size: deviceWidth * 0.3,
+                color: Colors.black,
+              ),
             ),
           ),
           Container(
-              width: deviceWidth * 0.48,
+              width: deviceWidth * 0.45,
               height: deviceHeight * 0.1,
               decoration: new BoxDecoration(
                 color: Colors.blue,
@@ -79,20 +87,24 @@ class ContactsItemVarios extends StatelessWidget {
     } else {
       return Column(
         children: [
-          Container(
-            decoration: new BoxDecoration(
-              border: Border.all(width: 3, color: Colors.black),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            width: deviceWidth * 0.48,
-            height: deviceHeight * 0.25,
-            child: Icon(
-              Icons.euro,
-              size: deviceWidth * 0.3,
+          TextButton(
+            onPressed: onClick,
+            child: Container(
+              decoration: new BoxDecoration(
+                border: Border.all(width: 3, color: Colors.black),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              width: deviceWidth * 0.45,
+              height: deviceHeight * 0.24,
+              child: Icon(
+                Icons.euro,
+                size: deviceWidth * 0.3,
+                color: Colors.black,
+              ),
             ),
           ),
           Container(
-              width: deviceWidth * 0.48,
+              width: deviceWidth * 0.45,
               height: deviceHeight * 0.1,
               decoration: new BoxDecoration(
                 color: Colors.blue,

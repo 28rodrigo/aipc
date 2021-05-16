@@ -13,7 +13,7 @@ class RegistoChamadasPage extends StatelessWidget {
           backgroundColor: Theme.of(context).primaryColorDark,
           title: Text(
             "Registo Chamadas",
-            style: TextStyle(fontSize: 40),
+            style: TextStyle(fontSize: 35),
           ),
         ),
         body: Center(
@@ -30,7 +30,9 @@ class RegistoChamadasPage extends StatelessWidget {
         bottomNavigationBar: BottomAppBar(
             color: Colors.white,
             child: navButtons(
-              goBack: () {},
+              goBack: () {
+                Navigator.pop(context);
+              },
             )));
   }
 }

@@ -93,9 +93,10 @@ class CriarContacto extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
-            child: BackNavigation(
-          goBack: () {},
+        bottomNavigationBar: BottomAppBar(child: BackNavigation(
+          goBack: () {
+            Navigator.pop(context);
+          },
         )));
   }
 }

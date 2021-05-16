@@ -1,5 +1,6 @@
 import 'package:aipc/components/backNavigation.dart';
 import 'package:aipc/components/navigationTeclado.dart';
+import 'package:aipc/pages/editarcontacto.dart';
 import 'package:flutter/material.dart';
 
 class ContactoDetailsPage extends StatelessWidget {
@@ -40,7 +41,12 @@ class ContactoDetailsPage extends StatelessWidget {
                     color: Theme.of(context).primaryColorDark,
                     borderRadius: BorderRadius.circular(12)),
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EditarContactoPage()));
+                    },
                     style: ButtonStyle(alignment: Alignment.topCenter),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -92,9 +98,10 @@ class ContactoDetailsPage extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
-            child: BackNavigation(
-          goBack: () {},
+        bottomNavigationBar: BottomAppBar(child: BackNavigation(
+          goBack: () {
+            Navigator.pop(context);
+          },
         )));
   }
 }

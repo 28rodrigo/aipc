@@ -1,5 +1,8 @@
 import 'package:aipc/components/Navigation.dart';
 import 'package:aipc/components/contactsitems.dart';
+import 'package:aipc/pages/contactoDetail.dart';
+import 'package:aipc/pages/criarContacto.dart';
+import 'package:aipc/pages/tecladoPesquisa.dart';
 import 'package:flutter/material.dart';
 import 'package:aipc/components/Contacts_Item.dart';
 
@@ -22,13 +25,32 @@ class ContactsPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ContactsItemVarios(itemType: 1),
-                  ContactsItemVarios(itemType: 2),
+                  ContactsItemVarios(
+                      itemType: 1,
+                      onClick: () {
+                        handleAddContact(context);
+                      }),
+                  ContactsItemVarios(
+                    itemType: 2,
+                    onClick: () {
+                      handlePesquisar(context);
+                    },
+                  ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [ContactsItemVarios(itemType: 3), ContactsItem()],
+                children: [
+                  ContactsItemVarios(
+                    itemType: 3,
+                    onClick: () {},
+                  ),
+                  ContactsItem(
+                    onClick: () {
+                      handleContactsDetail(context);
+                    },
+                  )
+                ],
               ),
             ],
           ),
@@ -40,5 +62,20 @@ class ContactsPage extends StatelessWidget {
                 Navigator.pop(context);
               },
             )));
+  }
+
+  void handleAddContact(context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => CriarContacto()));
+  }
+
+  void handlePesquisar(context) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => TecladoPesquisaPage()));
+  }
+
+  void handleContactsDetail(context) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ContactoDetailsPage()));
   }
 }

@@ -9,12 +9,13 @@ class AboutPage extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Theme.of(context).primaryColorDark,
           title: Text(
-            "Quim",
+            "Sobre",
             style: TextStyle(fontSize: 40),
           ),
         ),
         body: Text("Info sobre a App"),
-        bottomNavigationBar:
-            BottomAppBar(child: BackNavigation(goBack: () {})));
+        bottomNavigationBar: BottomAppBar(child: BackNavigation(goBack: () {
+          Navigator.pop(context);
+        })));
   }
 }

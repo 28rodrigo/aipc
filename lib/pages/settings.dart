@@ -1,6 +1,9 @@
 import 'package:aipc/components/backNavigation.dart';
 import 'package:aipc/main.dart';
+import 'package:aipc/pages/about.dart';
+import 'package:aipc/pages/editarcontacto.dart';
 import 'package:aipc/pages/home.dart';
+import 'package:aipc/pages/registoChamadas.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -97,7 +100,12 @@ class SettingsPage extends StatelessWidget {
               width: deviceWidth * 0.9,
               height: deviceHeight * 0.1,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditarContactoPage()));
+                },
                 child: Text(
                   "Editar Botão S.O.S",
                   textAlign: TextAlign.center,
@@ -113,7 +121,12 @@ class SettingsPage extends StatelessWidget {
               width: deviceWidth * 0.9,
               height: deviceHeight * 0.1,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegistoChamadasPage()));
+                },
                 child: Text(
                   "Registo de Chamadas",
                   textAlign: TextAlign.center,
@@ -129,7 +142,10 @@ class SettingsPage extends StatelessWidget {
               width: deviceWidth * 0.9,
               height: deviceHeight * 0.1,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AboutPage()));
+                },
                 child: Text(
                   "Sobre a APP",
                   textAlign: TextAlign.center,
