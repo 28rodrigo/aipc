@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class TecladoItem extends StatefulWidget {
   String text = "";
   double width = 0;
-  TecladoItem({this.text, this.width});
+  TextEditingController controller;
+  TecladoItem({this.text, this.width, this.controller});
 
   @override
   _TecladoItemState createState() => _TecladoItemState();
@@ -15,7 +16,10 @@ class _TecladoItemState extends State<TecladoItem> {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        if (widget.controller.text.length < 12)
+          widget.controller.text += widget.text;
+      },
       child: Container(
         alignment: Alignment.topCenter,
         height: deviceHeight * 0.14,

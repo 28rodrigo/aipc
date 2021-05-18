@@ -1,8 +1,11 @@
+import 'package:aipc/functions/makecalls.dart';
 import 'package:aipc/pages/accessSettings.dart';
 import 'package:aipc/pages/chamadasnaoatendidas.dart';
 import 'package:aipc/pages/contactos.dart';
 import 'package:aipc/pages/tecladoNumerico.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -81,7 +84,10 @@ class HomePage extends StatelessWidget {
               border: Border.all(width: 3, color: Colors.black),
             ),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                //FlutterPhoneDirectCaller.callNumber('912684074');
+                callnow('tel://912684074');
+              },
               style: ElevatedButton.styleFrom(
                   primary: Colors.grey[200],
                   shape: RoundedRectangleBorder(

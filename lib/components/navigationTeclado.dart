@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
-class navigationTeclado extends StatelessWidget {
+class NavigationTeclado extends StatelessWidget {
+  final void Function() goBack;
+  final void Function() goOK;
+  final void Function() goVoice;
+
+  NavigationTeclado({this.goBack, this.goOK, this.goVoice});
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -39,7 +44,7 @@ class navigationTeclado extends StatelessWidget {
                 size: 70,
                 color: Colors.red[800],
               ),
-              onPressed: () {},
+              onPressed: goBack,
             )),
         Container(
             width: deviceWidth * 0.34,

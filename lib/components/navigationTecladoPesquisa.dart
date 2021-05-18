@@ -1,10 +1,12 @@
+import 'package:aipc/functions/makecalls.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
 class navigationTecladoPesquisa extends StatelessWidget {
   final void Function() goBack;
+  final String callUrl;
 
-  navigationTecladoPesquisa({@required this.goBack});
+  navigationTecladoPesquisa({@required this.goBack, this.callUrl});
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -25,7 +27,9 @@ class navigationTecladoPesquisa extends StatelessWidget {
               size: 70,
               color: Colors.green,
             ),
-            onPressed: () {},
+            onPressed: () {
+              callnow(callUrl);
+            },
           ),
         ),
         Container(

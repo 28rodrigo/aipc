@@ -5,10 +5,19 @@ import 'package:aipc/pages/criarContacto.dart';
 import 'package:aipc/pages/tecladoPesquisa.dart';
 import 'package:flutter/material.dart';
 import 'package:aipc/components/Contacts_Item.dart';
+import 'package:aipc/functions/contacto_data.dart';
 
-class ContactsPage extends StatelessWidget {
+class ContactsPage extends StatefulWidget {
+  @override
+  _ContactsPageState createState() => _ContactsPageState();
+}
+
+class _ContactsPageState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
+    List<Map<String, String>> contactos = getContactos();
+    int pageNumber = 0;
+    int numberOfPages = ((contactos.length - 1) / 4).round();
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -19,41 +28,77 @@ class ContactsPage extends StatelessWidget {
           ),
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ContactsItemVarios(
-                      itemType: 1,
-                      onClick: () {
-                        handleAddContact(context);
-                      }),
-                  ContactsItemVarios(
-                    itemType: 2,
-                    onClick: () {
-                      handlePesquisar(context);
-                    },
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ContactsItemVarios(
-                    itemType: 3,
-                    onClick: () {},
-                  ),
-                  ContactsItem(
-                    onClick: () {
-                      handleContactsDetail(context);
-                    },
-                  )
-                ],
-              ),
-            ],
-          ),
+          child: pageNumber == 0
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ContactsItemVarios(
+                            itemType: 1,
+                            onClick: () {
+                              handleAddContact(context);
+                            }),
+                        ContactsItemVarios(
+                          itemType: 2,
+                          onClick: () {
+                            handlePesquisar(context);
+                          },
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ContactsItemVarios(
+                          itemType: 3,
+                          onClick: () {},
+                        ),
+                        ContactsItem(
+                          onClick: () {
+                            handleContactsDetail(context);
+                          },
+                        )
+                      ],
+                    ),
+                  ],
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ContactsItem(
+                          onClick: () {
+                            handleContactsDetail(context);
+                          },
+                        ),
+                        ContactsItem(
+                          onClick: () {
+                            handleContactsDetail(context);
+                          },
+                        )
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ContactsItem(
+                          onClick: () {
+                            handleContactsDetail(context);
+                          },
+                        ),
+                        ContactsItem(
+                          onClick: () {
+                            handleContactsDetail(context);
+                          },
+                        )
+                      ],
+                    ),
+                  ],
+                ),
         ),
         bottomNavigationBar: BottomAppBar(
             color: Colors.white,

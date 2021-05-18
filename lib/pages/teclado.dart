@@ -14,7 +14,7 @@ class TecladoPage extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Theme.of(context).primaryColorDark,
           title: Text(
-            "Pesquisa",
+            "NOME",
             style: TextStyle(fontSize: 40),
           ),
         ),
@@ -108,6 +108,10 @@ class TecladoPage extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: BottomAppBar(child: navigationTeclado()));
+        bottomNavigationBar: BottomAppBar(child: NavigationTeclado(
+          goBack: () {
+            Navigator.pop(context);
+          },
+        )));
   }
 }

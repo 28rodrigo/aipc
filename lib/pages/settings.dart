@@ -5,6 +5,7 @@ import 'package:aipc/pages/editarcontacto.dart';
 import 'package:aipc/pages/home.dart';
 import 'package:aipc/pages/registoChamadas.dart';
 import 'package:flutter/material.dart';
+import 'package:aipc/pages/preferencias.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -95,6 +96,27 @@ class SettingsPage extends StatelessWidget {
                   ),
                 )
               ],
+            ),
+            SizedBox(
+              width: deviceWidth * 0.9,
+              height: deviceHeight * 0.1,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PreferenciasPage()));
+                },
+                child: Text(
+                  "Preferências",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.black, fontSize: deviceWidth * 0.08),
+                ),
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[300],
+                    side: BorderSide(width: 1.5, color: Colors.black)),
+              ),
             ),
             SizedBox(
               width: deviceWidth * 0.9,

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class ContactsItem extends StatelessWidget {
   final void Function() onClick;
+  final Map<String, String> contactDetail;
 
-  ContactsItem({@required this.onClick});
+  ContactsItem({@required this.onClick, this.contactDetail});
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;

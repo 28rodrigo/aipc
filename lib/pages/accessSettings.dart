@@ -12,7 +12,7 @@ class AccessSettings extends StatelessWidget {
           backgroundColor: Theme.of(context).primaryColorDark,
           title: Text(
             "Acessar Definições",
-            style: TextStyle(fontSize: 40),
+            style: TextStyle(fontSize: 35),
           ),
         ),
         body: Center(

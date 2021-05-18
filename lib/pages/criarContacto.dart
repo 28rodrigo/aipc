@@ -1,7 +1,14 @@
 import 'package:aipc/components/backNavigation.dart';
+import 'package:aipc/pages/teclado.dart';
+import 'package:aipc/pages/tecladoNumerico.dart';
 import 'package:flutter/material.dart';
 
-class CriarContacto extends StatelessWidget {
+class CriarContacto extends StatefulWidget {
+  @override
+  _CriarContactoState createState() => _CriarContactoState();
+}
+
+class _CriarContactoState extends State<CriarContacto> {
   @override
   Widget build(BuildContext context) {
     final myController = TextEditingController();
@@ -44,23 +51,19 @@ class CriarContacto extends StatelessWidget {
                         fontWeight: FontWeight.w600),
                   ),
                   Container(
-                    width: deviceWidth * 0.95,
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 2, color: Colors.black),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Column(
-                      children: [
-                        TextField(
-                          textAlign: TextAlign.center,
-                          controller: myController,
-                          enabled: false,
-                          decoration: InputDecoration(border: InputBorder.none),
-                          style: TextStyle(
-                              fontSize: 40, fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                  ),
+                      width: deviceWidth * 0.95,
+                      height: deviceHeight * 0.1,
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: Colors.black),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TecladoPage()));
+                          },
+                          child: Text(""))),
                   SizedBox(
                     height: deviceHeight * 0.065,
                   ),
@@ -71,23 +74,20 @@ class CriarContacto extends StatelessWidget {
                         fontWeight: FontWeight.w600),
                   ),
                   Container(
-                    width: deviceWidth * 0.95,
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 2, color: Colors.black),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Column(
-                      children: [
-                        TextField(
-                          textAlign: TextAlign.center,
-                          controller: myController,
-                          enabled: false,
-                          decoration: InputDecoration(border: InputBorder.none),
-                          style: TextStyle(
-                              fontSize: 40, fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                  ),
+                      width: deviceWidth * 0.95,
+                      height: deviceHeight * 0.1,
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: Colors.black),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        TecladoNumericoPage()));
+                          },
+                          child: Text(""))),
                 ],
               )
             ],
