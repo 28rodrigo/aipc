@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class RegistoChamadaItem extends StatelessWidget {
+  final Map<String, String> contactDetails;
+
+  RegistoChamadaItem({@required this.contactDetails});
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -16,7 +19,7 @@ class RegistoChamadaItem extends StatelessWidget {
               border: Border.all(width: 3, color: Colors.black),
               borderRadius: BorderRadius.circular(15),
               image: new DecorationImage(
-                image: ExactAssetImage('assets/quim.png'),
+                image: NetworkImage(contactDetails.values.elementAt(3)),
                 fit: BoxFit.cover,
               ),
             ),
@@ -32,11 +35,11 @@ class RegistoChamadaItem extends StatelessWidget {
                 height: deviceHeight * 0.04,
                 child: FittedBox(
                   child: Text(
-                    "QUIM F. DRAMÁTICA",
+                    contactDetails.values.elementAt(1),
                     style: TextStyle(
                         fontWeight: FontWeight.w600, color: Colors.black),
                   ),
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
               Container(
@@ -44,7 +47,7 @@ class RegistoChamadaItem extends StatelessWidget {
                 height: deviceHeight * 0.04,
                 child: FittedBox(
                   child: Text(
-                    "12 de abril 10:00",
+                    contactDetails.values.elementAt(5),
                     style: TextStyle(color: Colors.black),
                   ),
                   fit: BoxFit.fitWidth,

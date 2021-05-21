@@ -33,6 +33,8 @@ class RegistoChamadasPage extends StatelessWidget {
               goBack: () {
                 Navigator.pop(context);
               },
+              increase: () {},
+              decrease: () {},
             )));
   }
 }

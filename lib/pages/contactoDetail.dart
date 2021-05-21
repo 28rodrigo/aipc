@@ -4,6 +4,9 @@ import 'package:aipc/pages/editarcontacto.dart';
 import 'package:flutter/material.dart';
 
 class ContactoDetailsPage extends StatelessWidget {
+  final Map<String, String> contactDetail;
+
+  ContactoDetailsPage({@required this.contactDetail});
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -13,7 +16,7 @@ class ContactoDetailsPage extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Theme.of(context).primaryColorDark,
           title: Text(
-            "Quim",
+            contactDetail.values.elementAt(1),
             style: TextStyle(fontSize: 40),
           ),
         ),
@@ -26,7 +29,7 @@ class ContactoDetailsPage extends StatelessWidget {
                 height: deviceWidth * 0.55,
                 decoration: BoxDecoration(
                     image: new DecorationImage(
-                      image: ExactAssetImage('assets/quim.png'),
+                      image: NetworkImage(contactDetail.values.elementAt(3)),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(12),

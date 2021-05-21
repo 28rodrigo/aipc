@@ -1,3 +1,4 @@
+import 'package:aipc/functions/contacto_data.dart';
 import 'package:aipc/functions/makecalls.dart';
 import 'package:aipc/pages/accessSettings.dart';
 import 'package:aipc/pages/chamadasnaoatendidas.dart';
@@ -12,7 +13,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
     double deviceHeight = MediaQuery.of(context).size.height;
-
+    final contactos = new Contactos();
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
@@ -163,7 +164,9 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ChamadasNaoAtendidasPage()));
+                        builder: (context) => ChamadasNaoAtendidasPage(
+                              contactos: contactos,
+                            )));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -249,7 +252,9 @@ class HomePage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ContactsPage()));
+                              builder: (context) => ContactsPage(
+                                    contactos: contactos,
+                                  )));
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Theme.of(context).primaryColorDark,

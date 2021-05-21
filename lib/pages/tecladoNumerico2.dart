@@ -3,16 +3,16 @@ import 'package:aipc/components/tecladoItem.dart';
 import 'package:aipc/functions/makecalls.dart';
 import 'package:flutter/material.dart';
 
-class TecladoNumericoPage extends StatefulWidget {
+class TecladoNumerico2Page extends StatefulWidget {
   void Function(String) setNumero;
 
-  TecladoNumericoPage({this.setNumero});
+  TecladoNumerico2Page({this.setNumero});
 
   @override
-  _TecladoNumericoPageState createState() => _TecladoNumericoPageState();
+  _TecladoNumerico2PageState createState() => _TecladoNumerico2PageState();
 }
 
-class _TecladoNumericoPageState extends State<TecladoNumericoPage> {
+class _TecladoNumerico2PageState extends State<TecladoNumerico2Page> {
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -159,7 +159,8 @@ class _TecladoNumericoPageState extends State<TecladoNumericoPage> {
             Navigator.pop(context);
           },
           goOK: () {
-            callnow('tel:' + myController.text);
+            widget.setNumero(myController.text);
+            Navigator.pop(context);
           },
         )));
   }

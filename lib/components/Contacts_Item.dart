@@ -20,7 +20,7 @@ class ContactsItem extends StatelessWidget {
               border: Border.all(width: 3, color: Colors.black),
               borderRadius: BorderRadius.circular(15),
               image: new DecorationImage(
-                image: ExactAssetImage('assets/quim.png'),
+                image: NetworkImage(contactDetail.values.elementAt(3)),
                 fit: BoxFit.cover,
               ),
             ),
@@ -30,19 +30,19 @@ class ContactsItem extends StatelessWidget {
         ),
         Container(
             width: deviceWidth * 0.45,
-            height: deviceHeight * 0.1,
             decoration: new BoxDecoration(
               color: Colors.blue,
               border: Border.all(width: 1, color: Colors.black),
               borderRadius: BorderRadius.circular(10),
             ),
             padding: EdgeInsets.only(top: 5, bottom: 5),
-            child: FittedBox(
-              fit: BoxFit.contain,
+            child: Flexible(
               child: Text(
-                "Quim",
+                contactDetail.values.elementAt(1),
+                overflow: TextOverflow.clip,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    fontWeight: FontWeight.w600, fontSize: deviceWidth * 0.08),
               ),
             ))
       ],

@@ -1,10 +1,15 @@
+import 'package:aipc/functions/contacto_data.dart';
+import 'package:aipc/pages/contactos.dart';
 import 'package:flutter/material.dart';
 
 class TecladoItem extends StatefulWidget {
+  Contactos contactos;
   String text = "";
   double width = 0;
+  bool search;
   TextEditingController controller;
-  TecladoItem({this.text, this.width, this.controller});
+  TecladoItem(
+      {this.text, this.width, this.controller, this.search, this.contactos});
 
   @override
   _TecladoItemState createState() => _TecladoItemState();
@@ -16,10 +21,20 @@ class _TecladoItemState extends State<TecladoItem> {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     return TextButton(
-      onPressed: () {
-        if (widget.controller.text.length < 12)
-          widget.controller.text += widget.text;
-      },
+      onPressed: widget.search
+          ? () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ContactsPage(
+                            specificLeter: widget.text,
+                            contactos: widget.contactos,
+                          )));
+            }
+          : () {
+              if (widget.controller.text.length < 12)
+                widget.controller.text += widget.text;
+            },
       child: Container(
         alignment: Alignment.topCenter,
         height: deviceHeight * 0.14,

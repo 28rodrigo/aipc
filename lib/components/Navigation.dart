@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 // ignore: camel_case_types
 class navButtons extends StatelessWidget {
   final void Function() goBack;
+  final void Function() increase;
+  final void Function() decrease;
 
-  navButtons({@required this.goBack});
+  navButtons(
+      {@required this.goBack,
+      @required this.increase,
+      @required this.decrease});
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -44,7 +49,7 @@ class navButtons extends StatelessWidget {
                   size: 70,
                   color: Colors.black,
                 ),
-                onPressed: () {},
+                onPressed: increase,
               )),
           Container(
               width: deviceWidth * 0.33,
@@ -59,7 +64,7 @@ class navButtons extends StatelessWidget {
                   size: 70,
                   color: Colors.black,
                 ),
-                onPressed: () {},
+                onPressed: decrease,
               )),
         ],
       ),

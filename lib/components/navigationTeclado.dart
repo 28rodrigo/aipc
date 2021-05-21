@@ -28,7 +28,7 @@ class NavigationTeclado extends StatelessWidget {
               size: 70,
               color: Colors.green,
             ),
-            onPressed: () {},
+            onPressed: goOK,
           ),
         ),
         Container(

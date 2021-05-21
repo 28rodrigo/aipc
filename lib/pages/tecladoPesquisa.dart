@@ -1,8 +1,36 @@
 import 'package:aipc/components/Navigation.dart';
 import 'package:aipc/components/tecladoItem.dart';
+import 'package:aipc/functions/contacto_data.dart';
 import 'package:flutter/material.dart';
 
-class TecladoPesquisaPage extends StatelessWidget {
+class TecladoPesquisaPage extends StatefulWidget {
+  Contactos contactos;
+  TecladoPesquisaPage({@required this.contactos});
+  @override
+  _TecladoPesquisaPageState createState() => _TecladoPesquisaPageState();
+}
+
+class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
+  final int numberOfPages = 3;
+  int pageNumber = 1;
+
+  void _increasePage() {
+    print(numberOfPages);
+    if (pageNumber < numberOfPages) {
+      setState(() {
+        pageNumber++;
+      });
+    }
+  }
+
+  void _decreasePage() {
+    if (pageNumber > 1) {
+      setState(() {
+        pageNumber--;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -21,50 +49,134 @@ class TecladoPesquisaPage extends StatelessWidget {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
-              width: deviceWidth * 0.95,
-              decoration: BoxDecoration(
-                  border: Border.all(width: 2, color: Colors.black),
-                  borderRadius: BorderRadius.circular(10)),
-              child: TextField(
-                controller: myController,
-                enabled: false,
-                decoration: InputDecoration(border: InputBorder.none),
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600),
-              ),
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TecladoItem(
-                  text: "A",
-                  width: deviceWidth * 0.28,
-                ),
-                TecladoItem(text: "B", width: deviceWidth * 0.28),
-                TecladoItem(text: "C", width: deviceWidth * 0.28)
+                pageNumber == 3 && (pageNumber * 12) + 65 - 12 > 90
+                    ? SizedBox()
+                    : TecladoItem(
+                        text: String.fromCharCode((pageNumber * 12) + 65 - 12),
+                        width: deviceWidth * 0.28,
+                        search: true,
+                        contactos: widget.contactos,
+                      ),
+                pageNumber == 3 && (pageNumber * 12) + 65 - 11 > 90
+                    ? SizedBox()
+                    : TecladoItem(
+                        text: String.fromCharCode((pageNumber * 12) + 65 - 11),
+                        width: deviceWidth * 0.28,
+                        search: true,
+                        contactos: widget.contactos,
+                      ),
+                pageNumber == 3 && (pageNumber * 12) + 65 - 10 > 90
+                    ? SizedBox()
+                    : TecladoItem(
+                        text: String.fromCharCode((pageNumber * 12) + 65 - 10),
+                        width: deviceWidth * 0.28,
+                        search: true,
+                        contactos: widget.contactos,
+                      )
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TecladoItem(text: "D", width: deviceWidth * 0.28),
-                TecladoItem(text: "E", width: deviceWidth * 0.28),
-                TecladoItem(text: "F", width: deviceWidth * 0.28)
+                pageNumber == 3 && (pageNumber * 12) + 65 - 9 > 90
+                    ? SizedBox()
+                    : TecladoItem(
+                        text: String.fromCharCode((pageNumber * 12) + 65 - 9),
+                        width: deviceWidth * 0.28,
+                        search: true,
+                        contactos: widget.contactos,
+                      ),
+                pageNumber == 3 && (pageNumber * 12) + 65 - 8 > 90
+                    ? SizedBox()
+                    : TecladoItem(
+                        text: String.fromCharCode((pageNumber * 12) + 65 - 8),
+                        width: deviceWidth * 0.28,
+                        search: true,
+                        contactos: widget.contactos,
+                      ),
+                pageNumber == 3 && (pageNumber * 12) + 65 - 7 > 90
+                    ? SizedBox()
+                    : TecladoItem(
+                        text: String.fromCharCode((pageNumber * 12) + 65 - 7),
+                        width: deviceWidth * 0.28,
+                        search: true,
+                        contactos: widget.contactos,
+                      )
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TecladoItem(text: "G", width: deviceWidth * 0.28),
-                TecladoItem(text: "H", width: deviceWidth * 0.28),
-                TecladoItem(text: "I", width: deviceWidth * 0.28)
+                pageNumber == 3 && (pageNumber * 12) + 65 - 6 > 90
+                    ? SizedBox()
+                    : TecladoItem(
+                        text: String.fromCharCode((pageNumber * 12) + 65 - 6),
+                        width: deviceWidth * 0.28,
+                        search: true,
+                        contactos: widget.contactos,
+                      ),
+                pageNumber == 3 && (pageNumber * 12) + 65 - 5 > 90
+                    ? SizedBox()
+                    : TecladoItem(
+                        text: String.fromCharCode((pageNumber * 12) + 65 - 5),
+                        width: deviceWidth * 0.28,
+                        search: true,
+                        contactos: widget.contactos,
+                      ),
+                pageNumber == 3 && (pageNumber * 12) + 65 - 4 > 90
+                    ? SizedBox()
+                    : TecladoItem(
+                        text: String.fromCharCode((pageNumber * 12) + 65 - 4),
+                        width: deviceWidth * 0.28,
+                        search: true,
+                        contactos: widget.contactos,
+                      )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                pageNumber == 3 && (pageNumber * 12) + 65 - 3 > 90
+                    ? SizedBox()
+                    : TecladoItem(
+                        text: String.fromCharCode((pageNumber * 12) + 65 - 3),
+                        width: deviceWidth * 0.28,
+                        search: true,
+                        contactos: widget.contactos,
+                      ),
+                pageNumber == 3 && (pageNumber * 12) + 65 - 2 > 90
+                    ? SizedBox()
+                    : TecladoItem(
+                        text: String.fromCharCode((pageNumber * 12) + 65 - 2),
+                        width: deviceWidth * 0.28,
+                        search: true,
+                        contactos: widget.contactos,
+                      ),
+                pageNumber == 3 && (pageNumber * 12) + 65 - 1 > 90
+                    ? SizedBox()
+                    : TecladoItem(
+                        text: String.fromCharCode((pageNumber * 12) + 65 - 1),
+                        width: deviceWidth * 0.28,
+                        search: true,
+                        contactos: widget.contactos,
+                      )
               ],
             ),
           ],
         )),
-        bottomNavigationBar: BottomAppBar(child: navButtons(
+        bottomNavigationBar: BottomAppBar(
+            child: navButtons(
           goBack: () {
             Navigator.pop(context);
+          },
+          increase: () {
+            _increasePage();
+          },
+          decrease: () {
+            _decreasePage();
           },
         )));
   }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "169055950836",
+    "project_id": "aipc-e8864",
+    "storage_bucket": "aipc-e8864.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169055950836:android:c219a441a784755f7d0ba1",
+        "android_client_info": {
+          "package_name": "com.example.aipc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169055950836-1dbnhjdnbjg78dqjeop55ab957ouufmq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmhneZhLON8T0cd0bEcJlJaXsZnxVtNTQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169055950836-1dbnhjdnbjg78dqjeop55ab957ouufmq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

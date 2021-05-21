@@ -3,7 +3,15 @@ import 'package:aipc/components/navigationTeclado.dart';
 import 'package:aipc/components/tecladoItem.dart';
 import 'package:flutter/material.dart';
 
-class TecladoPage extends StatelessWidget {
+class TecladoPage extends StatefulWidget {
+  void Function(String) setNome;
+
+  TecladoPage({this.setNome});
+  @override
+  _TecladoPageState createState() => _TecladoPageState();
+}
+
+class _TecladoPageState extends State<TecladoPage> {
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -43,25 +51,70 @@ class TecladoPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TecladoItem(text: "A", width: deviceWidth * 0.225),
-                          TecladoItem(text: "B", width: deviceWidth * 0.225),
-                          TecladoItem(text: "C", width: deviceWidth * 0.225)
+                          TecladoItem(
+                            text: "A",
+                            width: deviceWidth * 0.225,
+                            search: false,
+                            controller: myController,
+                          ),
+                          TecladoItem(
+                            text: "B",
+                            width: deviceWidth * 0.225,
+                            search: false,
+                            controller: myController,
+                          ),
+                          TecladoItem(
+                            text: "C",
+                            width: deviceWidth * 0.225,
+                            search: false,
+                            controller: myController,
+                          )
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TecladoItem(text: "D", width: deviceWidth * 0.225),
-                          TecladoItem(text: "E", width: deviceWidth * 0.225),
-                          TecladoItem(text: "F", width: deviceWidth * 0.225)
+                          TecladoItem(
+                            text: "D",
+                            width: deviceWidth * 0.225,
+                            search: false,
+                            controller: myController,
+                          ),
+                          TecladoItem(
+                            text: "E",
+                            width: deviceWidth * 0.225,
+                            search: false,
+                            controller: myController,
+                          ),
+                          TecladoItem(
+                            text: "F",
+                            width: deviceWidth * 0.225,
+                            search: false,
+                            controller: myController,
+                          )
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TecladoItem(text: "G", width: deviceWidth * 0.225),
-                          TecladoItem(text: "H", width: deviceWidth * 0.225),
-                          TecladoItem(text: "I", width: deviceWidth * 0.225)
+                          TecladoItem(
+                            text: "G",
+                            width: deviceWidth * 0.225,
+                            search: false,
+                            controller: myController,
+                          ),
+                          TecladoItem(
+                            text: "H",
+                            width: deviceWidth * 0.225,
+                            search: false,
+                            controller: myController,
+                          ),
+                          TecladoItem(
+                            text: "I",
+                            width: deviceWidth * 0.225,
+                            search: false,
+                            controller: myController,
+                          )
                         ],
                       ),
                     ],
@@ -108,8 +161,13 @@ class TecladoPage extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: BottomAppBar(child: NavigationTeclado(
+        bottomNavigationBar: BottomAppBar(
+            child: NavigationTeclado(
           goBack: () {
+            Navigator.pop(context);
+          },
+          goOK: () {
+            widget.setNome(myController.text);
             Navigator.pop(context);
           },
         )));
