@@ -1,46 +1,76 @@
 import 'package:aipc/components/backNavigation.dart';
 import 'package:aipc/components/navigationTeclado.dart';
+import 'package:aipc/functions/contacto_data.dart';
+import 'package:aipc/functions/makecalls.dart';
+import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/pages/editarcontacto.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class ContactoDetailsPage extends StatelessWidget {
+class ContactoDetailsPage extends StatefulWidget {
   final Map<String, String> contactDetail;
+  Contactos contactos;
 
-  ContactoDetailsPage({@required this.contactDetail});
+  ContactoDetailsPage({@required this.contactDetail, @required this.contactos});
+
+  @override
+  _ContactoDetailsPageState createState() => _ContactoDetailsPageState();
+}
+
+class _ContactoDetailsPageState extends State<ContactoDetailsPage> {
   @override
   Widget build(BuildContext context) {
+    DataProvider _data = Provider.of<DataProvider>(context);
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          iconTheme: IconThemeData(color: Theme.of(context).accentColor),
           backgroundColor: Theme.of(context).primaryColorDark,
           title: Text(
-            contactDetail.values.elementAt(1),
-            style: TextStyle(fontSize: 40),
+            widget.contactDetail.values.elementAt(1),
+            style: TextStyle(
+                fontSize: 40 * _data.count,
+                color: Theme.of(context).accentColor),
           ),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                width: deviceWidth * 0.55,
-                height: deviceWidth * 0.55,
-                decoration: BoxDecoration(
-                    image: new DecorationImage(
-                      image: NetworkImage(contactDetail.values.elementAt(3)),
-                      fit: BoxFit.cover,
+              widget.contactDetail.values.elementAt(3) != 'Icon-Euro'
+                  ? Container(
+                      width: deviceWidth * 0.55,
+                      height: deviceWidth * 0.55,
+                      decoration: BoxDecoration(
+                          image: new DecorationImage(
+                            image: NetworkImage(
+                                widget.contactDetail.values.elementAt(3)),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.black, width: 2)),
+                    )
+                  : Container(
+                      width: deviceWidth * 0.55,
+                      height: deviceWidth * 0.55,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                              color: Theme.of(context).accentColor, width: 2)),
+                      child: Icon(
+                        Icons.euro,
+                        size: deviceWidth * 0.4,
+                      ),
                     ),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.black, width: 2)),
-              ),
               Container(
                 alignment: Alignment.center,
                 width: deviceWidth * 0.8,
                 height: deviceHeight * 0.12,
                 decoration: BoxDecoration(
-                    border: Border.all(width: 2, color: Colors.black),
+                    border: Border.all(
+                        width: 2, color: Theme.of(context).accentColor),
                     color: Theme.of(context).primaryColorDark,
                     borderRadius: BorderRadius.circular(12)),
                 child: TextButton(
@@ -48,7 +78,13 @@ class ContactoDetailsPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => EditarContactoPage()));
+                              builder: (context) => EditarContactoPage(
+                                    contactDetail: widget.contactDetail,
+                                    contactos: widget.contactos,
+                                  ))).then((value) {
+                        setState(() {});
+                        Navigator.pop(context);
+                      });
                     },
                     style: ButtonStyle(alignment: Alignment.topCenter),
                     child: Row(
@@ -62,7 +98,7 @@ class ContactoDetailsPage extends StatelessWidget {
                         Text(
                           "EDITAR",
                           style: TextStyle(
-                              fontSize: deviceWidth * 0.12,
+                              fontSize: deviceWidth * 0.12 * _data.count,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
@@ -74,11 +110,15 @@ class ContactoDetailsPage extends StatelessWidget {
                 width: deviceWidth * 0.8,
                 height: deviceHeight * 0.25,
                 decoration: BoxDecoration(
-                    border: Border.all(width: 2, color: Colors.black),
+                    border: Border.all(
+                        width: 2, color: Theme.of(context).accentColor),
                     color: Colors.green,
                     borderRadius: BorderRadius.circular(12)),
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      callnow(
+                          'tel:' + widget.contactDetail.values.elementAt(2));
+                    },
                     style: ButtonStyle(alignment: Alignment.topCenter),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -91,7 +131,7 @@ class ContactoDetailsPage extends StatelessWidget {
                         Text(
                           "LIGAR",
                           style: TextStyle(
-                              fontSize: deviceWidth * 0.18,
+                              fontSize: deviceWidth * 0.18 * _data.count,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),

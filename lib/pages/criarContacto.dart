@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:aipc/components/backNavigation.dart';
 import 'package:aipc/components/navigationTecladoPesquisa.dart';
 import 'package:aipc/functions/contacto_data.dart';
+import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/pages/teclado.dart';
 import 'package:aipc/pages/tecladoNumerico.dart';
 import 'package:aipc/pages/tecladoNumerico2.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class CriarContacto extends StatefulWidget {
   Contactos contactos;
@@ -29,7 +31,6 @@ class _CriarContactoState extends State<CriarContacto> {
   final picker = ImagePicker();
 
   Future getImage() async {
-    String imageName;
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
     setState(() {
@@ -39,11 +40,19 @@ class _CriarContactoState extends State<CriarContacto> {
         print('No image selected.');
       }
     });
+  }
+
+  Future uploadFile() async {
+    String imageName;
     imageName = "image:" + DateTime.now().toIso8601String();
     TaskSnapshot snapshot =
         await storage.ref().child("Imagens/$imageName").putFile(_image);
     if (snapshot.state == TaskState.success) {
-      url = await snapshot.ref.getDownloadURL();
+      setState(() async {
+        url = await snapshot.ref.getDownloadURL();
+        print(url);
+      });
+
       final snackBar = SnackBar(content: Text('Yay! Successo'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
@@ -66,15 +75,19 @@ class _CriarContactoState extends State<CriarContacto> {
 
   @override
   Widget build(BuildContext context) {
+    DataProvider _data = Provider.of<DataProvider>(context);
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          iconTheme: IconThemeData(color: Theme.of(context).accentColor),
           backgroundColor: Theme.of(context).primaryColorDark,
           title: Text(
             "Criar Contacto",
-            style: TextStyle(fontSize: 40),
+            style: TextStyle(
+                fontSize: 40 * _data.count,
+                color: Theme.of(context).accentColor),
           ),
         ),
         body: Center(
@@ -86,7 +99,8 @@ class _CriarContactoState extends State<CriarContacto> {
                 height: deviceWidth * 0.55,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.black, width: 2)),
+                    border: Border.all(
+                        color: Theme.of(context).accentColor, width: 2)),
                 child: TextButton(
                   onPressed: () {
                     getImage();
@@ -95,7 +109,7 @@ class _CriarContactoState extends State<CriarContacto> {
                       ? Icon(
                           Icons.person_add_alt_1_sharp,
                           size: deviceHeight * 0.2,
-                          color: Colors.black,
+                          color: Theme.of(context).accentColor,
                         )
                       : Image.file(_image),
                 ),
@@ -105,14 +119,16 @@ class _CriarContactoState extends State<CriarContacto> {
                   Text(
                     "NOME:",
                     style: TextStyle(
-                        fontSize: deviceWidth * 0.1,
-                        fontWeight: FontWeight.w600),
+                        fontSize: deviceWidth * 0.1 * _data.count,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).accentColor),
                   ),
                   Container(
                       width: deviceWidth * 0.95,
                       height: deviceHeight * 0.1,
                       decoration: BoxDecoration(
-                          border: Border.all(width: 2, color: Colors.black),
+                          border: Border.all(
+                              width: 2, color: Theme.of(context).accentColor),
                           borderRadius: BorderRadius.circular(10)),
                       child: TextButton(
                           onPressed: () {
@@ -125,23 +141,25 @@ class _CriarContactoState extends State<CriarContacto> {
                           },
                           child: Text(nome,
                               style: TextStyle(
-                                  fontSize: deviceWidth * 0.1,
+                                  fontSize: deviceWidth * 0.1 * _data.count,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.black)))),
+                                  color: Theme.of(context).accentColor)))),
                   SizedBox(
                     height: deviceHeight * 0.065,
                   ),
                   Text(
                     "NUMERO:",
                     style: TextStyle(
-                        fontSize: deviceWidth * 0.1,
-                        fontWeight: FontWeight.w600),
+                        fontSize: deviceWidth * 0.1 * _data.count,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).accentColor),
                   ),
                   Container(
                       width: deviceWidth * 0.95,
                       height: deviceHeight * 0.1,
                       decoration: BoxDecoration(
-                          border: Border.all(width: 2, color: Colors.black),
+                          border: Border.all(
+                              width: 2, color: Theme.of(context).accentColor),
                           borderRadius: BorderRadius.circular(10)),
                       child: TextButton(
                           onPressed: () {
@@ -155,9 +173,9 @@ class _CriarContactoState extends State<CriarContacto> {
                           child: Text(
                             numero,
                             style: TextStyle(
-                                fontSize: deviceWidth * 0.1,
+                                fontSize: deviceWidth * 0.1 * _data.count,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.black),
+                                color: Theme.of(context).accentColor),
                           ))),
                 ],
               )
@@ -171,6 +189,7 @@ class _CriarContactoState extends State<CriarContacto> {
             Navigator.pop(context);
           },
           goOK: () {
+            uploadFile();
             setState(() {
               widget.contactos.maxId++;
               widget.contactos.contactos.add({
@@ -183,6 +202,8 @@ class _CriarContactoState extends State<CriarContacto> {
               });
               nome = "";
               numero = "";
+              widget.contactos.contactos.sort((a, b) =>
+                  a.values.elementAt(1).compareTo(b.values.elementAt(1)));
             });
 
             Navigator.pop(context);

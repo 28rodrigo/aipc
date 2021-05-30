@@ -1,6 +1,8 @@
 import 'package:aipc/functions/contacto_data.dart';
+import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/pages/contactos.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TecladoItem extends StatefulWidget {
   Contactos contactos;
@@ -18,6 +20,7 @@ class TecladoItem extends StatefulWidget {
 class _TecladoItemState extends State<TecladoItem> {
   @override
   Widget build(BuildContext context) {
+    DataProvider _data = Provider.of<DataProvider>(context);
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     return TextButton(
@@ -32,7 +35,7 @@ class _TecladoItemState extends State<TecladoItem> {
                           )));
             }
           : () {
-              if (widget.controller.text.length < 12)
+              if (widget.controller.text.length < 20)
                 widget.controller.text += widget.text;
             },
       child: Container(
@@ -40,11 +43,13 @@ class _TecladoItemState extends State<TecladoItem> {
         height: deviceHeight * 0.14,
         width: widget.width,
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 2),
+            border: Border.all(color: Theme.of(context).accentColor, width: 2),
             borderRadius: BorderRadius.circular(10)),
         child: Text(
           widget.text,
-          style: TextStyle(fontSize: deviceWidth * 0.28, color: Colors.black),
+          style: TextStyle(
+              fontSize: deviceWidth * 0.28 * _data.count,
+              color: Theme.of(context).accentColor),
         ),
       ),
     );

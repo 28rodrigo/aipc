@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 
 class RegistoChamadaItem extends StatelessWidget {
   final Map<String, String> contactDetails;
+  final void Function() goOk;
 
-  RegistoChamadaItem({@required this.contactDetails});
+  RegistoChamadaItem({@required this.contactDetails, this.goOk});
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     return TextButton(
-      onPressed: () {},
+      onPressed: goOk,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
             decoration: new BoxDecoration(
-              color: Colors.blue,
-              border: Border.all(width: 3, color: Colors.black),
+              color: Theme.of(context).primaryColorDark,
+              border:
+                  Border.all(width: 3, color: Theme.of(context).accentColor),
               borderRadius: BorderRadius.circular(15),
               image: new DecorationImage(
                 image: NetworkImage(contactDetails.values.elementAt(3)),
@@ -37,7 +39,8 @@ class RegistoChamadaItem extends StatelessWidget {
                   child: Text(
                     contactDetails.values.elementAt(1),
                     style: TextStyle(
-                        fontWeight: FontWeight.w600, color: Colors.black),
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).accentColor),
                   ),
                   fit: BoxFit.fitHeight,
                 ),
@@ -48,7 +51,7 @@ class RegistoChamadaItem extends StatelessWidget {
                 child: FittedBox(
                   child: Text(
                     contactDetails.values.elementAt(5),
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Theme.of(context).accentColor),
                   ),
                   fit: BoxFit.fitWidth,
                 ),
@@ -57,11 +60,23 @@ class RegistoChamadaItem extends StatelessWidget {
           ),
           Container(
             width: deviceWidth * 0.2,
-            child: Icon(
-              Icons.call_end_rounded,
-              color: Colors.red,
-              size: deviceWidth * 0.1,
-            ),
+            child: contactDetails.values.elementAt(4) == 'nAtendida'
+                ? Icon(
+                    Icons.call_end_rounded,
+                    color: Colors.red,
+                    size: deviceWidth * 0.1,
+                  )
+                : contactDetails.values.elementAt(4) == 'atendida'
+                    ? Icon(
+                        Icons.call,
+                        color: Colors.yellow,
+                        size: deviceWidth * 0.1,
+                      )
+                    : Icon(
+                        Icons.call,
+                        color: Colors.green,
+                        size: deviceWidth * 0.1,
+                      ),
           )
         ],
       ),

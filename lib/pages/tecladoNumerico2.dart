@@ -1,12 +1,15 @@
 import 'package:aipc/components/navigationTecladoPesquisa.dart';
 import 'package:aipc/components/tecladoItem.dart';
 import 'package:aipc/functions/makecalls.dart';
+import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TecladoNumerico2Page extends StatefulWidget {
   void Function(String) setNumero;
+  String startValue = "";
 
-  TecladoNumerico2Page({this.setNumero});
+  TecladoNumerico2Page({this.setNumero, this.startValue});
 
   @override
   _TecladoNumerico2PageState createState() => _TecladoNumerico2PageState();
@@ -15,16 +18,20 @@ class TecladoNumerico2Page extends StatefulWidget {
 class _TecladoNumerico2PageState extends State<TecladoNumerico2Page> {
   @override
   Widget build(BuildContext context) {
+    DataProvider _data = Provider.of<DataProvider>(context);
     final deviceWidth = MediaQuery.of(context).size.width;
     //final deviceHeight = MediaQuery.of(context).size.height;
-    final myController = TextEditingController();
+    final myController = TextEditingController(text: widget.startValue);
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          iconTheme: IconThemeData(color: Theme.of(context).accentColor),
           backgroundColor: Theme.of(context).primaryColorDark,
           title: Text(
             "Teclado",
-            style: TextStyle(fontSize: 40),
+            style: TextStyle(
+                fontSize: 40 * _data.count,
+                color: Theme.of(context).accentColor),
           ),
         ),
         body: Center(
@@ -36,13 +43,17 @@ class _TecladoNumerico2PageState extends State<TecladoNumerico2Page> {
                 Container(
                   width: deviceWidth * 0.82,
                   decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Colors.black),
+                      border: Border.all(
+                          width: 2, color: Theme.of(context).accentColor),
                       borderRadius: BorderRadius.circular(10)),
                   child: TextField(
                     controller: myController,
                     enabled: false,
                     decoration: InputDecoration(border: InputBorder.none),
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                        fontSize: 40 * _data.count,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).accentColor),
                   ),
                 ),
                 TextButton(
@@ -53,7 +64,7 @@ class _TecladoNumerico2PageState extends State<TecladoNumerico2Page> {
                     },
                     child: Icon(
                       Icons.backspace,
-                      color: Colors.black,
+                      color: Theme.of(context).accentColor,
                       size: deviceWidth * 0.1,
                     ))
               ],

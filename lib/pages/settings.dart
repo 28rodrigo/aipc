@@ -1,25 +1,32 @@
 import 'package:aipc/components/backNavigation.dart';
+import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/main.dart';
 import 'package:aipc/pages/about.dart';
+import 'package:aipc/pages/colorscheme.dart';
 import 'package:aipc/pages/editarcontacto.dart';
 import 'package:aipc/pages/home.dart';
 import 'package:aipc/pages/registoChamadas.dart';
 import 'package:flutter/material.dart';
 import 'package:aipc/pages/preferencias.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+    DataProvider _data = Provider.of<DataProvider>(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(color: Theme.of(context).accentColor),
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColorDark,
         title: Text(
           "Definições",
-          style: TextStyle(fontSize: 40),
+          style: TextStyle(
+              fontSize: 40 * _data.count.toDouble(),
+              color: Theme.of(context).accentColor),
         ),
       ),
       body: WillPopScope(
@@ -34,16 +41,23 @@ class SettingsPage extends StatelessWidget {
               width: deviceWidth * 0.9,
               height: deviceHeight * 0.1,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ColorSchemePage()));
+                },
                 child: Text(
                   "Esquema de Cores",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.black, fontSize: deviceWidth * 0.08),
+                      color: Theme.of(context).accentColor,
+                      fontSize: deviceWidth * 0.08 * _data.count),
                 ),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.grey[300],
-                    side: BorderSide(width: 1.5, color: Colors.black)),
+                    side: BorderSide(
+                        width: 1.5, color: Theme.of(context).accentColor)),
               ),
             ),
             Row(
@@ -53,15 +67,18 @@ class SettingsPage extends StatelessWidget {
                   width: deviceWidth * 0.2,
                   height: deviceHeight * 0.1,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _data.decrementCount();
+                    },
                     child: Icon(
                       Icons.remove,
-                      color: Colors.black,
+                      color: Theme.of(context).accentColor,
                       size: deviceWidth * 0.1,
                     ),
                     style: ElevatedButton.styleFrom(
                         primary: Colors.grey[300],
-                        side: BorderSide(width: 1.5, color: Colors.black)),
+                        side: BorderSide(
+                            width: 1.5, color: Theme.of(context).accentColor)),
                   ),
                 ),
                 SizedBox(
@@ -73,26 +90,31 @@ class SettingsPage extends StatelessWidget {
                       "Tamanho da letra",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Colors.black, fontSize: deviceWidth * 0.08),
+                          color: Theme.of(context).accentColor,
+                          fontSize: deviceWidth * 0.08 * _data.count),
                     ),
                     style: ElevatedButton.styleFrom(
                         primary: Colors.grey[300],
-                        side: BorderSide(width: 1.5, color: Colors.black)),
+                        side: BorderSide(
+                            width: 1.5, color: Theme.of(context).accentColor)),
                   ),
                 ),
                 SizedBox(
                   width: deviceWidth * 0.2,
                   height: deviceHeight * 0.1,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _data.incrementCount();
+                    },
                     child: Icon(
                       Icons.add,
-                      color: Colors.black,
+                      color: Theme.of(context).accentColor,
                       size: deviceWidth * 0.1,
                     ),
                     style: ElevatedButton.styleFrom(
                         primary: Colors.grey[300],
-                        side: BorderSide(width: 1.5, color: Colors.black)),
+                        side: BorderSide(
+                            width: 1.5, color: Theme.of(context).accentColor)),
                   ),
                 )
               ],
@@ -111,32 +133,13 @@ class SettingsPage extends StatelessWidget {
                   "Preferências",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.black, fontSize: deviceWidth * 0.08),
+                      color: Theme.of(context).accentColor,
+                      fontSize: deviceWidth * 0.08 * _data.count),
                 ),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.grey[300],
-                    side: BorderSide(width: 1.5, color: Colors.black)),
-              ),
-            ),
-            SizedBox(
-              width: deviceWidth * 0.9,
-              height: deviceHeight * 0.1,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EditarContactoPage()));
-                },
-                child: Text(
-                  "Editar Botão S.O.S",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.black, fontSize: deviceWidth * 0.08),
-                ),
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
-                    side: BorderSide(width: 1.5, color: Colors.black)),
+                    side: BorderSide(
+                        width: 1.5, color: Theme.of(context).accentColor)),
               ),
             ),
             SizedBox(
@@ -153,11 +156,13 @@ class SettingsPage extends StatelessWidget {
                   "Registo de Chamadas",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.black, fontSize: deviceWidth * 0.08),
+                      color: Theme.of(context).accentColor,
+                      fontSize: deviceWidth * 0.08 * _data.count),
                 ),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.grey[300],
-                    side: BorderSide(width: 1.5, color: Colors.black)),
+                    side: BorderSide(
+                        width: 1.5, color: Theme.of(context).accentColor)),
               ),
             ),
             SizedBox(
@@ -172,11 +177,13 @@ class SettingsPage extends StatelessWidget {
                   "Sobre a APP",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.black, fontSize: deviceWidth * 0.08),
+                      color: Theme.of(context).accentColor,
+                      fontSize: deviceWidth * 0.08 * _data.count),
                 ),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.grey[300],
-                    side: BorderSide(width: 1.5, color: Colors.black)),
+                    side: BorderSide(
+                        width: 1.5, color: Theme.of(context).accentColor)),
               ),
             )
           ],

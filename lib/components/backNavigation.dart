@@ -11,7 +11,7 @@ class BackNavigation extends StatelessWidget {
     final deviceHeight = MediaQuery.of(context).size.height;
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(width: 1, color: Colors.black),
+          border: Border.all(width: 1, color: Theme.of(context).accentColor),
           color: Theme.of(context).primaryColorDark),
       child: Container(
           height: deviceHeight * 0.1,
@@ -21,7 +21,7 @@ class BackNavigation extends StatelessWidget {
             child: Icon(
               Icons.arrow_back,
               size: 70,
-              color: Colors.black,
+              color: Theme.of(context).accentColor,
             ),
             onPressed: goBack,
           )),

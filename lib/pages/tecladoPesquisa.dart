@@ -1,7 +1,9 @@
 import 'package:aipc/components/Navigation.dart';
 import 'package:aipc/components/tecladoItem.dart';
 import 'package:aipc/functions/contacto_data.dart';
+import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TecladoPesquisaPage extends StatefulWidget {
   Contactos contactos;
@@ -34,15 +36,19 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
+    DataProvider _data = Provider.of<DataProvider>(context);
     //final deviceHeight = MediaQuery.of(context).size.height;
     final myController = TextEditingController();
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          iconTheme: IconThemeData(color: Theme.of(context).accentColor),
           backgroundColor: Theme.of(context).primaryColorDark,
           title: Text(
             "Pesquisa",
-            style: TextStyle(fontSize: 40),
+            style: TextStyle(
+                fontSize: 40 * _data.count,
+                color: Theme.of(context).accentColor),
           ),
         ),
         body: Center(

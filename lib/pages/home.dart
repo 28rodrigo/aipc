@@ -1,26 +1,38 @@
 import 'package:aipc/functions/contacto_data.dart';
 import 'package:aipc/functions/makecalls.dart';
+import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/pages/accessSettings.dart';
 import 'package:aipc/pages/chamadasnaoatendidas.dart';
 import 'package:aipc/pages/contactos.dart';
 import 'package:aipc/pages/tecladoNumerico.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:intl/intl.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var contactos = new Contactos();
+
   @override
   Widget build(BuildContext context) {
+    DataProvider _data = Provider.of<DataProvider>(context);
     double deviceWidth = MediaQuery.of(context).size.width;
     double deviceHeight = MediaQuery.of(context).size.height;
-    final contactos = new Contactos();
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColorDark,
+        iconTheme: IconThemeData(color: Theme.of(context).accentColor),
         title: Text(
           "Página Principal",
-          style: TextStyle(fontSize: 30),
+          style: TextStyle(
+              fontSize: 30 * _data.count, color: Theme.of(context).accentColor),
         ),
         centerTitle: true,
         actions: [
@@ -30,8 +42,12 @@ class HomePage extends StatelessWidget {
                 size: deviceHeight * 0.04,
               ),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AccessSettings()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AccessSettings())).then((value) {
+                  setState(() {});
+                });
               }),
         ],
       ),
@@ -48,7 +64,8 @@ class HomePage extends StatelessWidget {
                 width: deviceWidth * 0.95,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
-                  border: Border.all(width: 3, color: Colors.black),
+                  border: Border.all(
+                      width: 3, color: Theme.of(context).accentColor),
                 ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -60,16 +77,23 @@ class HomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                        "21:30",
+                        DateTime.now().hour.toString() +
+                            ':' +
+                            DateTime.now().minute.toString(),
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: deviceHeight * 0.08,
+                            color: Theme.of(context).accentColor,
+                            fontSize: deviceHeight * 0.08 * _data.count,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "20 de Abril de 2021",
+                        DateTime.now().day.toString() +
+                            '/' +
+                            DateTime.now().month.toString() +
+                            '/' +
+                            DateTime.now().year.toString(),
                         style: TextStyle(
-                            color: Colors.white, fontSize: deviceHeight * 0.04),
+                            color: Theme.of(context).accentColor,
+                            fontSize: deviceHeight * 0.06 * _data.count),
                       )
                     ],
                   ),
@@ -82,7 +106,8 @@ class HomePage extends StatelessWidget {
             width: deviceWidth * 0.95,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
-              border: Border.all(width: 3, color: Colors.black),
+              border:
+                  Border.all(width: 3, color: Theme.of(context).accentColor),
             ),
             child: ElevatedButton(
               onPressed: () {
@@ -90,7 +115,7 @@ class HomePage extends StatelessWidget {
                 callnow('tel://912684074');
               },
               style: ElevatedButton.styleFrom(
-                  primary: Colors.grey[200],
+                  primary: Theme.of(context).primaryColorDark,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15))),
               child: Row(
@@ -111,7 +136,7 @@ class HomePage extends StatelessWidget {
                     child: Text(
                       "S.O.S",
                       style: TextStyle(
-                          fontSize: deviceWidth * 0.2,
+                          fontSize: deviceWidth * 0.2 * _data.count,
                           fontWeight: FontWeight.bold,
                           color: Colors.red),
                     ),
@@ -122,9 +147,10 @@ class HomePage extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: Theme.of(context).primaryColorDark,
                 borderRadius: BorderRadius.circular(15),
-                border: Border.all(width: 3, color: Colors.black)),
+                border:
+                    Border.all(width: 3, color: Theme.of(context).accentColor)),
             width: deviceWidth * 0.95,
             height: deviceHeight * 0.16,
             alignment: Alignment.center,
@@ -134,16 +160,16 @@ class HomePage extends StatelessWidget {
                 Text(
                   "O seu numero:",
                   style: TextStyle(
-                      fontSize: deviceWidth * 0.1,
+                      fontSize: deviceWidth * 0.1 * _data.count,
                       fontWeight: FontWeight.normal,
-                      color: Colors.black),
+                      color: Theme.of(context).accentColor),
                 ),
                 Text(
                   "969869123",
                   style: TextStyle(
-                      fontSize: deviceWidth * 0.135,
+                      fontSize: deviceWidth * 0.135 * _data.count,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                      color: Theme.of(context).accentColor),
                 ),
               ],
             ),
@@ -151,13 +177,14 @@ class HomePage extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
-                border: Border.all(width: 3, color: Colors.black)),
+                border:
+                    Border.all(width: 3, color: Theme.of(context).accentColor)),
             width: deviceWidth * 0.95,
             height: deviceHeight * 0.15,
             alignment: Alignment.center,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  primary: Colors.grey[200],
+                  primary: Theme.of(context).primaryColorDark,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15))),
               onPressed: () {
@@ -186,9 +213,9 @@ class HomePage extends StatelessWidget {
                       "Chamadas\nNão Atendidas",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: deviceWidth * 0.075,
+                          fontSize: deviceWidth * 0.075 * _data.count,
                           fontWeight: FontWeight.normal,
-                          color: Colors.black),
+                          color: Theme.of(context).accentColor),
                     ),
                   ),
                 ],
@@ -205,7 +232,8 @@ class HomePage extends StatelessWidget {
                   height: deviceHeight * 0.165,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18),
-                      border: Border.all(width: 3, color: Colors.black)),
+                      border: Border.all(
+                          width: 3, color: Theme.of(context).accentColor)),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: Theme.of(context).primaryColorDark,
@@ -233,9 +261,9 @@ class HomePage extends StatelessWidget {
                         Text(
                           "Teclado",
                           style: TextStyle(
-                              fontSize: deviceWidth * 0.08,
+                              fontSize: deviceWidth * 0.08 * _data.count,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black),
+                              color: Theme.of(context).accentColor),
                         ),
                       ],
                     ),
@@ -246,7 +274,8 @@ class HomePage extends StatelessWidget {
                   width: deviceWidth * 0.47,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18),
-                      border: Border.all(width: 3, color: Colors.black)),
+                      border: Border.all(
+                          width: 3, color: Theme.of(context).accentColor)),
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -275,9 +304,9 @@ class HomePage extends StatelessWidget {
                         Text(
                           "Contactos",
                           style: TextStyle(
-                              fontSize: deviceWidth * 0.08,
+                              fontSize: deviceWidth * 0.08 * _data.count,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black),
+                              color: Theme.of(context).accentColor),
                         ),
                       ],
                     ),

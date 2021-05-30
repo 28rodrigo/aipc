@@ -21,7 +21,8 @@ class NavigationTecladoPesquisa extends StatelessWidget {
                 width: deviceWidth * 0.5,
                 height: deviceHeight * 0.1,
                 decoration: BoxDecoration(
-                  border: Border.all(width: 2, color: Colors.black),
+                  border: Border.all(
+                      width: 2, color: Theme.of(context).accentColor),
                   color: Theme.of(context).primaryColorDark,
                 ),
                 child: TextButton(
@@ -37,7 +38,8 @@ class NavigationTecladoPesquisa extends StatelessWidget {
                   width: deviceWidth * 0.5,
                   height: deviceHeight * 0.1,
                   decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Colors.black),
+                      border: Border.all(
+                          width: 2, color: Theme.of(context).accentColor),
                       color: Theme.of(context).primaryColorDark),
                   child: TextButton(
                     style: ButtonStyle(alignment: Alignment.topCenter),
@@ -54,7 +56,8 @@ class NavigationTecladoPesquisa extends StatelessWidget {
                 width: deviceWidth * 0.5,
                 height: deviceHeight * 0.1,
                 decoration: BoxDecoration(
-                  border: Border.all(width: 2, color: Colors.black),
+                  border: Border.all(
+                      width: 2, color: Theme.of(context).accentColor),
                   color: Theme.of(context).primaryColorDark,
                 ),
                 child: TextButton(
@@ -70,7 +73,8 @@ class NavigationTecladoPesquisa extends StatelessWidget {
                   width: deviceWidth * 0.5,
                   height: deviceHeight * 0.1,
                   decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Colors.black),
+                      border: Border.all(
+                          width: 2, color: Theme.of(context).accentColor),
                       color: Theme.of(context).primaryColorDark),
                   child: TextButton(
                     style: ButtonStyle(alignment: Alignment.topCenter),

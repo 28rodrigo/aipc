@@ -1,12 +1,15 @@
 import 'package:aipc/components/Navigation.dart';
 import 'package:aipc/components/contactsitems.dart';
+import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/pages/contactoDetail.dart';
 import 'package:aipc/pages/criarContacto.dart';
+import 'package:aipc/pages/editarcontacto.dart';
 import 'package:aipc/pages/semContactos.dart';
 import 'package:aipc/pages/tecladoPesquisa.dart';
 import 'package:flutter/material.dart';
 import 'package:aipc/components/Contacts_Item.dart';
 import 'package:aipc/functions/contacto_data.dart';
+import 'package:provider/provider.dart';
 
 class ContactsPage extends StatefulWidget {
   final String specificLeter;
@@ -36,16 +39,28 @@ class _ContactsPageState extends State<ContactsPage> {
   }
 
   void _decreasePage() {
-    if (pageNumber > 0) {
-      setState(() {
-        pageNumber--;
-      });
+    if (letter) {
+      if (pageNumber > 1) {
+        setState(() {
+          pageNumber--;
+        });
+      }
+    } else {
+      if (pageNumber > 0) {
+        setState(() {
+          pageNumber--;
+        });
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    contactos = widget.contactos.getContactos();
+    DataProvider _data = Provider.of<DataProvider>(context);
+    contactos = widget.contactos
+        .getContactos()
+        .where((element) => element.values.elementAt(0) != "0")
+        .toList();
     if (widget.specificLeter != null) {
       letter = true;
       contactos.forEach((element) {
@@ -73,9 +88,12 @@ class _ContactsPageState extends State<ContactsPage> {
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Theme.of(context).primaryColorDark,
+          iconTheme: IconThemeData(color: Theme.of(context).accentColor),
           title: Text(
             "Contactos",
-            style: TextStyle(fontSize: 40),
+            style: TextStyle(
+                fontSize: 40 * _data.count,
+                color: Theme.of(context).accentColor),
           ),
         ),
         body: Center(
@@ -106,7 +124,13 @@ class _ContactsPageState extends State<ContactsPage> {
                       children: [
                         ContactsItemVarios(
                           itemType: 3,
-                          onClick: () {},
+                          onClick: () {
+                            handleContactsDetail(
+                                context,
+                                widget.contactos.getContactos().firstWhere(
+                                    (element) =>
+                                        element.values.elementAt(0) == '0'));
+                          },
                         ),
                         ContactsItem(
                           onClick: () {
@@ -217,7 +241,9 @@ class _ContactsPageState extends State<ContactsPage> {
         MaterialPageRoute(
             builder: (context) => CriarContacto(
                   contactos: widget.contactos,
-                )));
+                ))).then((value) {
+      setState(() {});
+    });
   }
 
   void handlePesquisar(context) {
@@ -235,6 +261,9 @@ class _ContactsPageState extends State<ContactsPage> {
         MaterialPageRoute(
             builder: (context) => ContactoDetailsPage(
                   contactDetail: contactDetail,
-                )));
+                  contactos: widget.contactos,
+                ))).then((value) {
+      setState(() {});
+    });
   }
 }

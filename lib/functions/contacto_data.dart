@@ -1,6 +1,14 @@
 class Contactos {
   int maxId = 14;
+  Map<String, String> sos = {
+    "id": "0112",
+    "nome": "S.O.S",
+    "numero": "112",
+    "url":
+        "https://firebasestorage.googleapis.com/v0/b/aipc-e8864.appspot.com/o/Imagens%2Fsos.png?alt=media&token=53853bfc-2da8-4663-bfb1-c7da2872f41f"
+  };
   List<Map<String, String>> contactos = [
+    {"id": "0", "nome": "Consultar Saldo", "numero": "112", "url": "Icon-Euro"},
     {
       "id": "8",
       "nome": "Marilyn Monroe",

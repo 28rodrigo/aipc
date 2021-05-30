@@ -18,7 +18,7 @@ class NavigationTeclado extends StatelessWidget {
           width: deviceWidth * 0.33,
           height: deviceHeight * 0.1,
           decoration: BoxDecoration(
-            border: Border.all(width: 2, color: Colors.black),
+            border: Border.all(width: 2, color: Theme.of(context).accentColor),
             color: Theme.of(context).primaryColorDark,
           ),
           child: TextButton(
@@ -35,7 +35,8 @@ class NavigationTeclado extends StatelessWidget {
             width: deviceWidth * 0.33,
             height: deviceHeight * 0.1,
             decoration: BoxDecoration(
-                border: Border.all(width: 2, color: Colors.black),
+                border:
+                    Border.all(width: 2, color: Theme.of(context).accentColor),
                 color: Theme.of(context).primaryColorDark),
             child: TextButton(
               style: ButtonStyle(alignment: Alignment.topCenter),
@@ -50,14 +51,15 @@ class NavigationTeclado extends StatelessWidget {
             width: deviceWidth * 0.34,
             height: deviceHeight * 0.1,
             decoration: BoxDecoration(
-                border: Border.all(width: 2, color: Colors.black),
+                border:
+                    Border.all(width: 2, color: Theme.of(context).accentColor),
                 color: Theme.of(context).primaryColorDark),
             child: TextButton(
               style: ButtonStyle(alignment: Alignment.topCenter),
               child: Icon(
                 Icons.mic,
                 size: 70,
-                color: Colors.black,
+                color: Theme.of(context).accentColor,
               ),
               onPressed: () {},
             )),
