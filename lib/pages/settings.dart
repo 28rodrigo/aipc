@@ -9,6 +9,7 @@ import 'package:aipc/pages/registoChamadas.dart';
 import 'package:flutter/material.dart';
 import 'package:aipc/pages/preferencias.dart';
 import 'package:provider/provider.dart';
+import 'package:swipedetector/swipedetector.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -30,50 +31,39 @@ class SettingsPage extends StatelessWidget {
         ),
       ),
       body: WillPopScope(
-        onWillPop: () async {
-          Future.value(false);
-        },
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SizedBox(
-              width: deviceWidth * 0.9,
-              height: deviceHeight * 0.1,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ColorSchemePage()));
-                },
-                child: Text(
-                  "Esquema de Cores",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontSize: deviceWidth * 0.08 * _data.count),
-                ),
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
-                    side: BorderSide(
-                        width: 1.5, color: Theme.of(context).accentColor)),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          onWillPop: () async {
+            Future.value(false);
+          },
+          child: SwipeDetector(
+            onSwipeRight: () {
+              if (_data.gesture == 1)
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => HomePage(),
+                    ),
+                    (route) => false);
+            },
+            child: Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
-                  width: deviceWidth * 0.2,
+                  width: deviceWidth * 0.9,
                   height: deviceHeight * 0.1,
                   child: ElevatedButton(
                     onPressed: () {
-                      _data.decrementCount();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ColorSchemePage()));
                     },
-                    child: Icon(
-                      Icons.remove,
-                      color: Theme.of(context).accentColor,
-                      size: deviceWidth * 0.1,
+                    child: Text(
+                      "Esquema de Cores",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Theme.of(context).accentColor,
+                          fontSize: deviceWidth * 0.08 * _data.count),
                     ),
                     style: ElevatedButton.styleFrom(
                         primary: Colors.grey[300],
@@ -81,13 +71,80 @@ class SettingsPage extends StatelessWidget {
                             width: 1.5, color: Theme.of(context).accentColor)),
                   ),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: deviceWidth * 0.2,
+                      height: deviceHeight * 0.1,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          _data.decrementCount();
+                        },
+                        child: Icon(
+                          Icons.remove,
+                          color: Theme.of(context).accentColor,
+                          size: deviceWidth * 0.1,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.grey[300],
+                            side: BorderSide(
+                                width: 1.5,
+                                color: Theme.of(context).accentColor)),
+                      ),
+                    ),
+                    SizedBox(
+                      width: deviceWidth * 0.5,
+                      height: deviceHeight * 0.1,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Tamanho da letra",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Theme.of(context).accentColor,
+                              fontSize: deviceWidth * 0.08 * _data.count),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.grey[300],
+                            side: BorderSide(
+                                width: 1.5,
+                                color: Theme.of(context).accentColor)),
+                      ),
+                    ),
+                    SizedBox(
+                      width: deviceWidth * 0.2,
+                      height: deviceHeight * 0.1,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          _data.incrementCount();
+                        },
+                        child: Icon(
+                          Icons.add,
+                          color: Theme.of(context).accentColor,
+                          size: deviceWidth * 0.1,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.grey[300],
+                            side: BorderSide(
+                                width: 1.5,
+                                color: Theme.of(context).accentColor)),
+                      ),
+                    )
+                  ],
+                ),
                 SizedBox(
-                  width: deviceWidth * 0.5,
+                  width: deviceWidth * 0.9,
                   height: deviceHeight * 0.1,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PreferenciasPage()));
+                    },
                     child: Text(
-                      "Tamanho da letra",
+                      "Preferências",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Theme.of(context).accentColor,
@@ -100,16 +157,42 @@ class SettingsPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: deviceWidth * 0.2,
+                  width: deviceWidth * 0.9,
                   height: deviceHeight * 0.1,
                   child: ElevatedButton(
                     onPressed: () {
-                      _data.incrementCount();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegistoChamadasPage()));
                     },
-                    child: Icon(
-                      Icons.add,
-                      color: Theme.of(context).accentColor,
-                      size: deviceWidth * 0.1,
+                    child: Text(
+                      "Registo de Chamadas",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Theme.of(context).accentColor,
+                          fontSize: deviceWidth * 0.08 * _data.count),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[300],
+                        side: BorderSide(
+                            width: 1.5, color: Theme.of(context).accentColor)),
+                  ),
+                ),
+                SizedBox(
+                  width: deviceWidth * 0.9,
+                  height: deviceHeight * 0.1,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => AboutPage()));
+                    },
+                    child: Text(
+                      "Sobre a APP",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Theme.of(context).accentColor,
+                          fontSize: deviceWidth * 0.08 * _data.count),
                     ),
                     style: ElevatedButton.styleFrom(
                         primary: Colors.grey[300],
@@ -118,77 +201,8 @@ class SettingsPage extends StatelessWidget {
                   ),
                 )
               ],
-            ),
-            SizedBox(
-              width: deviceWidth * 0.9,
-              height: deviceHeight * 0.1,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PreferenciasPage()));
-                },
-                child: Text(
-                  "Preferências",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontSize: deviceWidth * 0.08 * _data.count),
-                ),
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
-                    side: BorderSide(
-                        width: 1.5, color: Theme.of(context).accentColor)),
-              ),
-            ),
-            SizedBox(
-              width: deviceWidth * 0.9,
-              height: deviceHeight * 0.1,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => RegistoChamadasPage()));
-                },
-                child: Text(
-                  "Registo de Chamadas",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontSize: deviceWidth * 0.08 * _data.count),
-                ),
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
-                    side: BorderSide(
-                        width: 1.5, color: Theme.of(context).accentColor)),
-              ),
-            ),
-            SizedBox(
-              width: deviceWidth * 0.9,
-              height: deviceHeight * 0.1,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AboutPage()));
-                },
-                child: Text(
-                  "Sobre a APP",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontSize: deviceWidth * 0.08 * _data.count),
-                ),
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
-                    side: BorderSide(
-                        width: 1.5, color: Theme.of(context).accentColor)),
-              ),
-            )
-          ],
-        )),
-      ),
+            )),
+          )),
       bottomNavigationBar: BottomAppBar(child: BackNavigation(
         goBack: () {
           Navigator.pushAndRemoveUntil(

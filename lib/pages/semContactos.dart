@@ -2,6 +2,7 @@ import 'package:aipc/components/backNavigation.dart';
 import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:swipedetector/swipedetector.dart';
 
 class SemContactos extends StatelessWidget {
   @override
@@ -20,12 +21,17 @@ class SemContactos extends StatelessWidget {
                 color: Theme.of(context).accentColor),
           ),
         ),
-        body: Center(
-            child: Text(
-          "Sem Contactos",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: deviceWidth * 0.2 * _data.count),
-        )),
+        body: SwipeDetector(
+          onSwipeRight: () {
+            if (_data.gesture == 1) Navigator.pop(context);
+          },
+          child: Center(
+              child: Text(
+            "Sem Contactos",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: deviceWidth * 0.2 * _data.count),
+          )),
+        ),
         bottomNavigationBar: BottomAppBar(
             color: Colors.white,
             child: BackNavigation(goBack: () {

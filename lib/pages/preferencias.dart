@@ -2,9 +2,11 @@ import 'package:aipc/components/backNavigation.dart';
 import 'package:aipc/functions/contacto_data.dart';
 import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/pages/editarcontacto.dart';
+import 'package:aipc/pages/gestos.dart';
 import 'package:aipc/pages/registoChamadas.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:swipedetector/swipedetector.dart';
 
 class PreferenciasPage extends StatelessWidget {
   @override
@@ -28,84 +30,87 @@ class PreferenciasPage extends StatelessWidget {
         onWillPop: () async {
           Future.value(false);
         },
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SizedBox(
-              width: deviceWidth * 0.9,
-              height: deviceHeight * 0.1,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EditarContactoPage(
-                                contactDetail: new Contactos().sos,
-                                contactos: new Contactos(),
-                              )));
-                },
-                child: Text(
-                  "Tipo de Teclado",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: deviceWidth * 0.08 * _data.count),
+        child: SwipeDetector(
+          onSwipeRight: () {
+            if (_data.gesture == 1) Navigator.pop(context);
+          },
+          child: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                width: deviceWidth * 0.9,
+                height: deviceHeight * 0.1,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditarContactoPage(
+                                  contactDetail: new Contactos().sos,
+                                  contactos: new Contactos(),
+                                )));
+                  },
+                  child: Text(
+                    "Tipo de Teclado",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: deviceWidth * 0.08 * _data.count),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[300],
+                      side: BorderSide(width: 1.5, color: Colors.black)),
                 ),
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
-                    side: BorderSide(width: 1.5, color: Colors.black)),
               ),
-            ),
-            SizedBox(
-              width: deviceWidth * 0.9,
-              height: deviceHeight * 0.1,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => RegistoChamadasPage()));
-                },
-                child: Text(
-                  "Ativar Gestos",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: deviceWidth * 0.08 * _data.count),
+              SizedBox(
+                width: deviceWidth * 0.9,
+                height: deviceHeight * 0.1,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => GestosPage()));
+                  },
+                  child: Text(
+                    "Ativar Gestos",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: deviceWidth * 0.08 * _data.count),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[300],
+                      side: BorderSide(width: 1.5, color: Colors.black)),
                 ),
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
-                    side: BorderSide(width: 1.5, color: Colors.black)),
               ),
-            ),
-            SizedBox(
-              width: deviceWidth * 0.9,
-              height: deviceHeight * 0.1,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EditarContactoPage(
-                                contactDetail: new Contactos().sos,
-                                contactos: new Contactos(),
-                              )));
-                },
-                child: Text(
-                  "Editar Botão S.O.S",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: deviceWidth * 0.08 * _data.count),
+              SizedBox(
+                width: deviceWidth * 0.9,
+                height: deviceHeight * 0.1,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditarContactoPage(
+                                  contactDetail: new Contactos().sos,
+                                  contactos: new Contactos(),
+                                )));
+                  },
+                  child: Text(
+                    "Editar Botão S.O.S",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: deviceWidth * 0.08 * _data.count),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[300],
+                      side: BorderSide(width: 1.5, color: Colors.black)),
                 ),
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
-                    side: BorderSide(width: 1.5, color: Colors.black)),
-              ),
-            )
-          ],
-        )),
+              )
+            ],
+          )),
+        ),
       ),
       bottomNavigationBar: BottomAppBar(child: BackNavigation(
         goBack: () {

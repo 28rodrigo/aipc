@@ -37,6 +37,7 @@ dependencies:
   intl: ^0.17.0
   easy_dynamic_theme: ^2.2.0
   provider: ^5.0.0
+  swipedetector: 1.2.0
 
 dev_dependencies:
   flutter_test:

@@ -6,6 +6,7 @@ import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/pages/contactoDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:swipedetector/swipedetector.dart';
 
 class RegistoChamadasPage extends StatefulWidget {
   //Contactos contactos;
@@ -61,57 +62,68 @@ class _RegistoChamadasPageState extends State<RegistoChamadasPage> {
                 color: Theme.of(context).accentColor),
           ),
         ),
-        body: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            (pageNumber * 5) - 5 <= registoContactos.length - 1
-                ? RegistoChamadaItem(
-                    contactDetails: registoContactos[(pageNumber * 5) - 5],
-                    goOk: () {
-                      handleContactsDetail(
-                          context, registoContactos[(pageNumber * 5) - 5]);
-                    },
-                  )
-                : SizedBox(),
-            (pageNumber * 5) - 4 <= registoContactos.length - 1
-                ? RegistoChamadaItem(
-                    contactDetails: registoContactos[(pageNumber * 5) - 4],
-                    goOk: () {
-                      handleContactsDetail(
-                          context, registoContactos[(pageNumber * 5) - 4]);
-                    },
-                  )
-                : SizedBox(),
-            (pageNumber * 5) - 3 <= registoContactos.length - 1
-                ? RegistoChamadaItem(
-                    contactDetails: registoContactos[(pageNumber * 5) - 3],
-                    goOk: () {
-                      handleContactsDetail(
-                          context, registoContactos[(pageNumber * 5) - 3]);
-                    },
-                  )
-                : SizedBox(),
-            (pageNumber * 5) - 2 <= registoContactos.length - 1
-                ? RegistoChamadaItem(
-                    contactDetails: registoContactos[(pageNumber * 5) - 2],
-                    goOk: () {
-                      handleContactsDetail(
-                          context, registoContactos[(pageNumber * 5) - 2]);
-                    },
-                  )
-                : SizedBox(),
-            (pageNumber * 5) - 1 <= registoContactos.length - 1
-                ? RegistoChamadaItem(
-                    contactDetails: registoContactos[(pageNumber * 5) - 1],
-                    goOk: () {
-                      handleContactsDetail(
-                          context, registoContactos[(pageNumber * 5) - 1]);
-                    },
-                  )
-                : SizedBox(),
-          ],
-        )),
+        body: SwipeDetector(
+          onSwipeRight: () {
+            if (_data.gesture == 1) Navigator.pop(context);
+          },
+          onSwipeUp: () {
+            if (_data.gesture == 1) _increasePage(numberOfPages);
+          },
+          onSwipeDown: () {
+            if (_data.gesture == 1) _decreasePage();
+          },
+          child: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              (pageNumber * 5) - 5 <= registoContactos.length - 1
+                  ? RegistoChamadaItem(
+                      contactDetails: registoContactos[(pageNumber * 5) - 5],
+                      goOk: () {
+                        handleContactsDetail(
+                            context, registoContactos[(pageNumber * 5) - 5]);
+                      },
+                    )
+                  : SizedBox(),
+              (pageNumber * 5) - 4 <= registoContactos.length - 1
+                  ? RegistoChamadaItem(
+                      contactDetails: registoContactos[(pageNumber * 5) - 4],
+                      goOk: () {
+                        handleContactsDetail(
+                            context, registoContactos[(pageNumber * 5) - 4]);
+                      },
+                    )
+                  : SizedBox(),
+              (pageNumber * 5) - 3 <= registoContactos.length - 1
+                  ? RegistoChamadaItem(
+                      contactDetails: registoContactos[(pageNumber * 5) - 3],
+                      goOk: () {
+                        handleContactsDetail(
+                            context, registoContactos[(pageNumber * 5) - 3]);
+                      },
+                    )
+                  : SizedBox(),
+              (pageNumber * 5) - 2 <= registoContactos.length - 1
+                  ? RegistoChamadaItem(
+                      contactDetails: registoContactos[(pageNumber * 5) - 2],
+                      goOk: () {
+                        handleContactsDetail(
+                            context, registoContactos[(pageNumber * 5) - 2]);
+                      },
+                    )
+                  : SizedBox(),
+              (pageNumber * 5) - 1 <= registoContactos.length - 1
+                  ? RegistoChamadaItem(
+                      contactDetails: registoContactos[(pageNumber * 5) - 1],
+                      goOk: () {
+                        handleContactsDetail(
+                            context, registoContactos[(pageNumber * 5) - 1]);
+                      },
+                    )
+                  : SizedBox(),
+            ],
+          )),
+        ),
         bottomNavigationBar: BottomAppBar(
             color: Colors.white,
             child: navButtons(

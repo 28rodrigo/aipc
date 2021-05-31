@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:aipc/components/Contacts_Item.dart';
 import 'package:aipc/functions/contacto_data.dart';
 import 'package:provider/provider.dart';
+import 'package:swipedetector/swipedetector.dart';
 
 class ContactsPage extends StatefulWidget {
   final String specificLeter;
@@ -96,129 +97,140 @@ class _ContactsPageState extends State<ContactsPage> {
                 color: Theme.of(context).accentColor),
           ),
         ),
-        body: Center(
-          child: pageNumber == 0
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ContactsItemVarios(
-                            itemType: 1,
+        body: SwipeDetector(
+          onSwipeUp: () {
+            if (_data.gesture == 1) _increasePage();
+          },
+          onSwipeDown: () {
+            if (_data.gesture == 1) _decreasePage();
+          },
+          onSwipeRight: () {
+            if (_data.gesture == 1) Navigator.pop(context);
+          },
+          child: Center(
+            child: pageNumber == 0
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ContactsItemVarios(
+                              itemType: 1,
+                              onClick: () {
+                                handleAddContact(context);
+                              }),
+                          ContactsItemVarios(
+                            itemType: 2,
                             onClick: () {
-                              handleAddContact(context);
-                            }),
-                        ContactsItemVarios(
-                          itemType: 2,
-                          onClick: () {
-                            handlePesquisar(context);
-                          },
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ContactsItemVarios(
-                          itemType: 3,
-                          onClick: () {
-                            handleContactsDetail(
-                                context,
-                                widget.contactos.getContactos().firstWhere(
-                                    (element) =>
-                                        element.values.elementAt(0) == '0'));
-                          },
-                        ),
-                        ContactsItem(
-                          onClick: () {
-                            handleContactsDetail(context, contactos[0]);
-                          },
-                          contactDetail: contactos[0],
-                        )
-                      ],
-                    ),
-                  ],
-                )
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        (pageNumber * 4) - 4 <= maxLength
-                            ? ContactsItem(
-                                onClick: () {
-                                  handleContactsDetail(
-                                      context,
-                                      letter
-                                          ? contactosLetter[
-                                              (pageNumber * 4) - 4]
-                                          : contactos[(pageNumber * 4) - 4]);
-                                },
-                                contactDetail: letter
-                                    ? contactosLetter[(pageNumber * 4) - 4]
-                                    : contactos[(pageNumber * 4) - 4],
-                              )
-                            : SizedBox(),
-                        (pageNumber * 4) - 3 <= maxLength
-                            ? ContactsItem(
-                                onClick: () {
-                                  handleContactsDetail(
-                                      context,
-                                      letter
-                                          ? contactosLetter[
-                                              (pageNumber * 4) - 3]
-                                          : contactos[(pageNumber * 4) - 3]);
-                                },
-                                contactDetail: letter
-                                    ? contactosLetter[(pageNumber * 4) - 3]
-                                    : contactos[(pageNumber * 4) - 3],
-                              )
-                            : SizedBox()
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        (pageNumber * 4) - 2 <= maxLength
-                            ? ContactsItem(
-                                onClick: () {
-                                  handleContactsDetail(
-                                      context,
-                                      letter
-                                          ? contactosLetter[
-                                              (pageNumber * 4) - 2]
-                                          : contactos[(pageNumber * 4) - 2]);
-                                },
-                                contactDetail: letter
-                                    ? contactosLetter[(pageNumber * 4) - 2]
-                                    : contactos[(pageNumber * 4) - 2],
-                              )
-                            : SizedBox(),
-                        (pageNumber * 4) - 1 <= maxLength
-                            ? ContactsItem(
-                                onClick: () {
-                                  handleContactsDetail(
-                                      context,
-                                      letter
-                                          ? contactosLetter[
-                                              (pageNumber * 4) - 1]
-                                          : contactos[(pageNumber * 4) - 1]);
-                                },
-                                contactDetail: letter
-                                    ? contactosLetter[(pageNumber * 4) - 1]
-                                    : contactos[(pageNumber * 4) - 1],
-                              )
-                            : SizedBox()
-                      ],
-                    ),
-                  ],
-                ),
+                              handlePesquisar(context);
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ContactsItemVarios(
+                            itemType: 3,
+                            onClick: () {
+                              handleContactsDetail(
+                                  context,
+                                  widget.contactos.getContactos().firstWhere(
+                                      (element) =>
+                                          element.values.elementAt(0) == '0'));
+                            },
+                          ),
+                          ContactsItem(
+                            onClick: () {
+                              handleContactsDetail(context, contactos[0]);
+                            },
+                            contactDetail: contactos[0],
+                          )
+                        ],
+                      ),
+                    ],
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          (pageNumber * 4) - 4 <= maxLength
+                              ? ContactsItem(
+                                  onClick: () {
+                                    handleContactsDetail(
+                                        context,
+                                        letter
+                                            ? contactosLetter[
+                                                (pageNumber * 4) - 4]
+                                            : contactos[(pageNumber * 4) - 4]);
+                                  },
+                                  contactDetail: letter
+                                      ? contactosLetter[(pageNumber * 4) - 4]
+                                      : contactos[(pageNumber * 4) - 4],
+                                )
+                              : SizedBox(),
+                          (pageNumber * 4) - 3 <= maxLength
+                              ? ContactsItem(
+                                  onClick: () {
+                                    handleContactsDetail(
+                                        context,
+                                        letter
+                                            ? contactosLetter[
+                                                (pageNumber * 4) - 3]
+                                            : contactos[(pageNumber * 4) - 3]);
+                                  },
+                                  contactDetail: letter
+                                      ? contactosLetter[(pageNumber * 4) - 3]
+                                      : contactos[(pageNumber * 4) - 3],
+                                )
+                              : SizedBox()
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          (pageNumber * 4) - 2 <= maxLength
+                              ? ContactsItem(
+                                  onClick: () {
+                                    handleContactsDetail(
+                                        context,
+                                        letter
+                                            ? contactosLetter[
+                                                (pageNumber * 4) - 2]
+                                            : contactos[(pageNumber * 4) - 2]);
+                                  },
+                                  contactDetail: letter
+                                      ? contactosLetter[(pageNumber * 4) - 2]
+                                      : contactos[(pageNumber * 4) - 2],
+                                )
+                              : SizedBox(),
+                          (pageNumber * 4) - 1 <= maxLength
+                              ? ContactsItem(
+                                  onClick: () {
+                                    handleContactsDetail(
+                                        context,
+                                        letter
+                                            ? contactosLetter[
+                                                (pageNumber * 4) - 1]
+                                            : contactos[(pageNumber * 4) - 1]);
+                                  },
+                                  contactDetail: letter
+                                      ? contactosLetter[(pageNumber * 4) - 1]
+                                      : contactos[(pageNumber * 4) - 1],
+                                )
+                              : SizedBox()
+                        ],
+                      ),
+                    ],
+                  ),
+          ),
         ),
         bottomNavigationBar: BottomAppBar(
             color: Colors.white,

@@ -6,6 +6,7 @@ import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/pages/contactoDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:swipedetector/swipedetector.dart';
 
 class ChamadasNaoAtendidasPage extends StatefulWidget {
   Contactos contactos;
@@ -67,57 +68,68 @@ class _ChamadasNaoAtendidasPageState extends State<ChamadasNaoAtendidasPage> {
                 color: Theme.of(context).accentColor),
           ),
         ),
-        body: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            (pageNumber * 5) - 5 <= chamadasNAtendidas.length - 1
-                ? RegistoChamadaItem(
-                    contactDetails: chamadasNAtendidas[(pageNumber * 5) - 5],
-                    goOk: () {
-                      handleContactsDetail(
-                          context, chamadasNAtendidas[(pageNumber * 5) - 5]);
-                    },
-                  )
-                : SizedBox(),
-            (pageNumber * 5) - 4 <= chamadasNAtendidas.length - 1
-                ? RegistoChamadaItem(
-                    contactDetails: chamadasNAtendidas[(pageNumber * 5) - 4],
-                    goOk: () {
-                      handleContactsDetail(
-                          context, chamadasNAtendidas[(pageNumber * 5) - 4]);
-                    },
-                  )
-                : SizedBox(),
-            (pageNumber * 5) - 3 <= chamadasNAtendidas.length - 1
-                ? RegistoChamadaItem(
-                    contactDetails: chamadasNAtendidas[(pageNumber * 5) - 3],
-                    goOk: () {
-                      handleContactsDetail(
-                          context, chamadasNAtendidas[(pageNumber * 5) - 3]);
-                    },
-                  )
-                : SizedBox(),
-            (pageNumber * 5) - 2 <= chamadasNAtendidas.length - 1
-                ? RegistoChamadaItem(
-                    contactDetails: chamadasNAtendidas[(pageNumber * 5) - 2],
-                    goOk: () {
-                      handleContactsDetail(
-                          context, chamadasNAtendidas[(pageNumber * 5) - 2]);
-                    },
-                  )
-                : SizedBox(),
-            (pageNumber * 5) - 1 <= chamadasNAtendidas.length - 1
-                ? RegistoChamadaItem(
-                    contactDetails: chamadasNAtendidas[(pageNumber * 5) - 1],
-                    goOk: () {
-                      handleContactsDetail(
-                          context, chamadasNAtendidas[(pageNumber * 5) - 1]);
-                    },
-                  )
-                : SizedBox(),
-          ],
-        )),
+        body: SwipeDetector(
+          onSwipeRight: () {
+            if (_data.gesture == 1) Navigator.pop(context);
+          },
+          onSwipeDown: () {
+            if (_data.gesture == 1) _decreasePage();
+          },
+          onSwipeUp: () {
+            if (_data.gesture == 1) _increasePage(numberOfPages);
+          },
+          child: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              (pageNumber * 5) - 5 <= chamadasNAtendidas.length - 1
+                  ? RegistoChamadaItem(
+                      contactDetails: chamadasNAtendidas[(pageNumber * 5) - 5],
+                      goOk: () {
+                        handleContactsDetail(
+                            context, chamadasNAtendidas[(pageNumber * 5) - 5]);
+                      },
+                    )
+                  : SizedBox(),
+              (pageNumber * 5) - 4 <= chamadasNAtendidas.length - 1
+                  ? RegistoChamadaItem(
+                      contactDetails: chamadasNAtendidas[(pageNumber * 5) - 4],
+                      goOk: () {
+                        handleContactsDetail(
+                            context, chamadasNAtendidas[(pageNumber * 5) - 4]);
+                      },
+                    )
+                  : SizedBox(),
+              (pageNumber * 5) - 3 <= chamadasNAtendidas.length - 1
+                  ? RegistoChamadaItem(
+                      contactDetails: chamadasNAtendidas[(pageNumber * 5) - 3],
+                      goOk: () {
+                        handleContactsDetail(
+                            context, chamadasNAtendidas[(pageNumber * 5) - 3]);
+                      },
+                    )
+                  : SizedBox(),
+              (pageNumber * 5) - 2 <= chamadasNAtendidas.length - 1
+                  ? RegistoChamadaItem(
+                      contactDetails: chamadasNAtendidas[(pageNumber * 5) - 2],
+                      goOk: () {
+                        handleContactsDetail(
+                            context, chamadasNAtendidas[(pageNumber * 5) - 2]);
+                      },
+                    )
+                  : SizedBox(),
+              (pageNumber * 5) - 1 <= chamadasNAtendidas.length - 1
+                  ? RegistoChamadaItem(
+                      contactDetails: chamadasNAtendidas[(pageNumber * 5) - 1],
+                      goOk: () {
+                        handleContactsDetail(
+                            context, chamadasNAtendidas[(pageNumber * 5) - 1]);
+                      },
+                    )
+                  : SizedBox(),
+            ],
+          )),
+        ),
         bottomNavigationBar: BottomAppBar(
             color: Colors.white,
             child: navButtons(

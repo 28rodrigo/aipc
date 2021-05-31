@@ -2,6 +2,7 @@ import 'package:aipc/components/backNavigation.dart';
 import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:swipedetector/swipedetector.dart';
 
 class AboutPage extends StatelessWidget {
   @override
@@ -19,7 +20,11 @@ class AboutPage extends StatelessWidget {
                 color: Theme.of(context).accentColor),
           ),
         ),
-        body: Text("Info sobre a App"),
+        body: SwipeDetector(
+            onSwipeRight: () {
+              if (_data.gesture == 1) Navigator.pop(context);
+            },
+            child: Text("Info sobre a App")),
         bottomNavigationBar: BottomAppBar(child: BackNavigation(goBack: () {
           Navigator.pop(context);
         })));

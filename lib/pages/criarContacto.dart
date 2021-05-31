@@ -11,6 +11,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:swipedetector/swipedetector.dart';
 
 class CriarContacto extends StatefulWidget {
   Contactos contactos;
@@ -90,96 +91,102 @@ class _CriarContactoState extends State<CriarContacto> {
                 color: Theme.of(context).accentColor),
           ),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                width: deviceWidth * 0.55,
-                height: deviceWidth * 0.55,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                        color: Theme.of(context).accentColor, width: 2)),
-                child: TextButton(
-                  onPressed: () {
-                    getImage();
-                  },
-                  child: _image == null
-                      ? Icon(
-                          Icons.person_add_alt_1_sharp,
-                          size: deviceHeight * 0.2,
-                          color: Theme.of(context).accentColor,
-                        )
-                      : Image.file(_image),
-                ),
-              ),
-              Column(
-                children: [
-                  Text(
-                    "NOME:",
-                    style: TextStyle(
-                        fontSize: deviceWidth * 0.1 * _data.count,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).accentColor),
+        body: SwipeDetector(
+          onSwipeRight: () {
+            if (_data.gesture == 1) Navigator.pop(context);
+          },
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  width: deviceWidth * 0.55,
+                  height: deviceWidth * 0.55,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                          color: Theme.of(context).accentColor, width: 2)),
+                  child: TextButton(
+                    onPressed: () {
+                      getImage();
+                    },
+                    child: _image == null
+                        ? Icon(
+                            Icons.person_add_alt_1_sharp,
+                            size: deviceHeight * 0.2,
+                            color: Theme.of(context).accentColor,
+                          )
+                        : Image.file(_image),
                   ),
-                  Container(
-                      width: deviceWidth * 0.95,
-                      height: deviceHeight * 0.1,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 2, color: Theme.of(context).accentColor),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => TecladoPage(
-                                          setNome: setNome,
-                                        )));
-                          },
-                          child: Text(nome,
+                ),
+                Column(
+                  children: [
+                    Text(
+                      "NOME:",
+                      style: TextStyle(
+                          fontSize: deviceWidth * 0.1 * _data.count,
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).accentColor),
+                    ),
+                    Container(
+                        width: deviceWidth * 0.95,
+                        height: deviceHeight * 0.1,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 2, color: Theme.of(context).accentColor),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => TecladoPage(
+                                            setNome: setNome,
+                                          )));
+                            },
+                            child: Text(nome,
+                                style: TextStyle(
+                                    fontSize: deviceWidth * 0.1 * _data.count,
+                                    fontWeight: FontWeight.w600,
+                                    color: Theme.of(context).accentColor)))),
+                    SizedBox(
+                      height: deviceHeight * 0.065,
+                    ),
+                    Text(
+                      "NUMERO:",
+                      style: TextStyle(
+                          fontSize: deviceWidth * 0.1 * _data.count,
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).accentColor),
+                    ),
+                    Container(
+                        width: deviceWidth * 0.95,
+                        height: deviceHeight * 0.1,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 2, color: Theme.of(context).accentColor),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          TecladoNumerico2Page(
+                                            setNumero: setNumero,
+                                          )));
+                            },
+                            child: Text(
+                              numero,
                               style: TextStyle(
                                   fontSize: deviceWidth * 0.1 * _data.count,
                                   fontWeight: FontWeight.w600,
-                                  color: Theme.of(context).accentColor)))),
-                  SizedBox(
-                    height: deviceHeight * 0.065,
-                  ),
-                  Text(
-                    "NUMERO:",
-                    style: TextStyle(
-                        fontSize: deviceWidth * 0.1 * _data.count,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).accentColor),
-                  ),
-                  Container(
-                      width: deviceWidth * 0.95,
-                      height: deviceHeight * 0.1,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 2, color: Theme.of(context).accentColor),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => TecladoNumerico2Page(
-                                          setNumero: setNumero,
-                                        )));
-                          },
-                          child: Text(
-                            numero,
-                            style: TextStyle(
-                                fontSize: deviceWidth * 0.1 * _data.count,
-                                fontWeight: FontWeight.w600,
-                                color: Theme.of(context).accentColor),
-                          ))),
-                ],
-              )
-            ],
+                                  color: Theme.of(context).accentColor),
+                            ))),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: BottomAppBar(
