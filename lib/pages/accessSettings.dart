@@ -39,7 +39,7 @@ class AccessSettings extends StatelessWidget {
                     "Tem a certeza que quer\naceder ás definições?",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Theme.of(context).primaryColorDark,
+                        color: Theme.of(context).accentColor,
                         fontWeight: FontWeight.bold),
                   ),
                   fit: BoxFit.contain,

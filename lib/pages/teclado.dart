@@ -3,8 +3,10 @@ import 'package:aipc/components/navigationTeclado.dart';
 import 'package:aipc/components/tecladoItem.dart';
 import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class TecladoPage extends StatefulWidget {
   final void Function(String) setNome;
@@ -16,10 +18,52 @@ class TecladoPage extends StatefulWidget {
 }
 
 class _TecladoPageState extends State<TecladoPage> {
+  stt.SpeechToText _speech;
+  bool _isListening = false;
+  double _confidence = 1.0;
   final int numberOfPages = 3;
   int aux = 0;
   int pageNumber = 1;
   var myController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _speech = stt.SpeechToText();
+  }
+
+  void _listen() async {
+    var status = await Permission.contacts.request();
+    if (status.isGranted) {
+      if (!_isListening) {
+        bool available = await _speech.initialize(
+          onStatus: (val) => print('onStatus: $val'),
+          onError: (val) => print('onError: $val'),
+        );
+        if (available) {
+          setState(() {
+            _isListening = true;
+          });
+          _speech.listen(onResult: (val) {
+            setState(() {
+              myController.text = val.recognizedWords;
+              if (val.hasConfidenceRating && val.confidence > 0) {
+                _confidence = val.confidence;
+              }
+            });
+          });
+        }
+      } else {
+        setState(() {
+          _isListening = false;
+          _speech.stop();
+        });
+      }
+    } else {
+      print('Microphone access denied');
+    }
+  }
+
   void _increasePage() {
     print(numberOfPages);
     if (pageNumber < numberOfPages) {
@@ -260,6 +304,7 @@ class _TecladoPageState extends State<TecladoPage> {
             widget.setNome(myController.text);
             Navigator.pop(context);
           },
+          goVoice: _listen,
         )));
   }
 }

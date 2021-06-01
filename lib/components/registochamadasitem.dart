@@ -42,7 +42,7 @@ class RegistoChamadaItem extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).accentColor),
                   ),
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.contain,
                 ),
               ),
               Container(

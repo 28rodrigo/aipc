@@ -61,7 +61,7 @@ class NavigationTeclado extends StatelessWidget {
                 size: 70,
                 color: Theme.of(context).accentColor,
               ),
-              onPressed: () {},
+              onPressed: goVoice,
             )),
       ],
     );

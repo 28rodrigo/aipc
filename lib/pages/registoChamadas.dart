@@ -145,7 +145,6 @@ class _RegistoChamadasPageState extends State<RegistoChamadasPage> {
         MaterialPageRoute(
             builder: (context) => ContactoDetailsPage(
                   contactDetail: contactDetail,
-                  contactos: new Contactos(),
                 )));
   }
 }

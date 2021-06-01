@@ -7,8 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
 
 class TecladoPesquisaPage extends StatefulWidget {
-  Contactos contactos;
-  TecladoPesquisaPage({@required this.contactos});
+  TecladoPesquisaPage();
   @override
   _TecladoPesquisaPageState createState() => _TecladoPesquisaPageState();
 }
@@ -76,7 +75,6 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
                               String.fromCharCode((pageNumber * 12) + 65 - 12),
                           width: deviceWidth * 0.28,
                           search: true,
-                          contactos: widget.contactos,
                         ),
                   pageNumber == 3 && (pageNumber * 12) + 65 - 11 > 90
                       ? SizedBox()
@@ -85,7 +83,6 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
                               String.fromCharCode((pageNumber * 12) + 65 - 11),
                           width: deviceWidth * 0.28,
                           search: true,
-                          contactos: widget.contactos,
                         ),
                   pageNumber == 3 && (pageNumber * 12) + 65 - 10 > 90
                       ? SizedBox()
@@ -94,7 +91,6 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
                               String.fromCharCode((pageNumber * 12) + 65 - 10),
                           width: deviceWidth * 0.28,
                           search: true,
-                          contactos: widget.contactos,
                         )
                 ],
               ),
@@ -107,7 +103,6 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
                           text: String.fromCharCode((pageNumber * 12) + 65 - 9),
                           width: deviceWidth * 0.28,
                           search: true,
-                          contactos: widget.contactos,
                         ),
                   pageNumber == 3 && (pageNumber * 12) + 65 - 8 > 90
                       ? SizedBox()
@@ -115,7 +110,6 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
                           text: String.fromCharCode((pageNumber * 12) + 65 - 8),
                           width: deviceWidth * 0.28,
                           search: true,
-                          contactos: widget.contactos,
                         ),
                   pageNumber == 3 && (pageNumber * 12) + 65 - 7 > 90
                       ? SizedBox()
@@ -123,7 +117,6 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
                           text: String.fromCharCode((pageNumber * 12) + 65 - 7),
                           width: deviceWidth * 0.28,
                           search: true,
-                          contactos: widget.contactos,
                         )
                 ],
               ),
@@ -136,7 +129,6 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
                           text: String.fromCharCode((pageNumber * 12) + 65 - 6),
                           width: deviceWidth * 0.28,
                           search: true,
-                          contactos: widget.contactos,
                         ),
                   pageNumber == 3 && (pageNumber * 12) + 65 - 5 > 90
                       ? SizedBox()
@@ -144,7 +136,6 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
                           text: String.fromCharCode((pageNumber * 12) + 65 - 5),
                           width: deviceWidth * 0.28,
                           search: true,
-                          contactos: widget.contactos,
                         ),
                   pageNumber == 3 && (pageNumber * 12) + 65 - 4 > 90
                       ? SizedBox()
@@ -152,7 +143,6 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
                           text: String.fromCharCode((pageNumber * 12) + 65 - 4),
                           width: deviceWidth * 0.28,
                           search: true,
-                          contactos: widget.contactos,
                         )
                 ],
               ),
@@ -165,7 +155,6 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
                           text: String.fromCharCode((pageNumber * 12) + 65 - 3),
                           width: deviceWidth * 0.28,
                           search: true,
-                          contactos: widget.contactos,
                         ),
                   pageNumber == 3 && (pageNumber * 12) + 65 - 2 > 90
                       ? SizedBox()
@@ -173,7 +162,6 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
                           text: String.fromCharCode((pageNumber * 12) + 65 - 2),
                           width: deviceWidth * 0.28,
                           search: true,
-                          contactos: widget.contactos,
                         ),
                   pageNumber == 3 && (pageNumber * 12) + 65 - 1 > 90
                       ? SizedBox()
@@ -181,7 +169,6 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
                           text: String.fromCharCode((pageNumber * 12) + 65 - 1),
                           width: deviceWidth * 0.28,
                           search: true,
-                          contactos: widget.contactos,
                         )
                 ],
               ),

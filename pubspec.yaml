@@ -38,6 +38,12 @@ dependencies:
   easy_dynamic_theme: ^2.2.0
   provider: ^5.0.0
   swipedetector: 1.2.0
+  contacts_service: ^0.6.1
+  speech_to_text: ^2.3.0
+  toast: ^0.1.5
+  permission_handler:
+ 
+  
 
 dev_dependencies:
   flutter_test:

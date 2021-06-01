@@ -9,9 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
 
 class ChamadasNaoAtendidasPage extends StatefulWidget {
-  Contactos contactos;
-
-  ChamadasNaoAtendidasPage({@required this.contactos});
+  ChamadasNaoAtendidasPage();
   @override
   _ChamadasNaoAtendidasPageState createState() =>
       _ChamadasNaoAtendidasPageState();
@@ -41,10 +39,9 @@ class _ChamadasNaoAtendidasPageState extends State<ChamadasNaoAtendidasPage> {
 
   @override
   Widget build(BuildContext context) {
-    registoContactos = widget.contactos.getRegistoChamadas();
     List<Map<String, String>> chamadasNAtendidas = [];
     DataProvider _data = Provider.of<DataProvider>(context);
-
+    registoContactos = _data.contactos.getRegistoChamadas();
     registoContactos.forEach((element) {
       if (element.values.elementAt(4) == 'nAtendida') {
         chamadasNAtendidas.add(element);
@@ -145,13 +142,15 @@ class _ChamadasNaoAtendidasPageState extends State<ChamadasNaoAtendidasPage> {
             )));
   }
 
-  void handleContactsDetail(context, contactDetail) {
+  void handleContactsDetail(
+    context,
+    contactDetail,
+  ) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => ContactoDetailsPage(
                   contactDetail: contactDetail,
-                  contactos: widget.contactos,
                 )));
   }
 }

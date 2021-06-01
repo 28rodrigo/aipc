@@ -14,9 +14,8 @@ import 'package:swipedetector/swipedetector.dart';
 
 class ContactsPage extends StatefulWidget {
   final String specificLeter;
-  Contactos contactos;
 
-  ContactsPage({this.specificLeter, @required this.contactos});
+  ContactsPage({this.specificLeter});
   @override
   _ContactsPageState createState() => _ContactsPageState();
 }
@@ -58,7 +57,7 @@ class _ContactsPageState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
     DataProvider _data = Provider.of<DataProvider>(context);
-    contactos = widget.contactos
+    contactos = _data.contactos
         .getContactos()
         .where((element) => element.values.elementAt(0) != "0")
         .toList();
@@ -138,7 +137,7 @@ class _ContactsPageState extends State<ContactsPage> {
                             onClick: () {
                               handleContactsDetail(
                                   context,
-                                  widget.contactos.getContactos().firstWhere(
+                                  _data.contactos.getContactos().firstWhere(
                                       (element) =>
                                           element.values.elementAt(0) == '0'));
                             },
@@ -249,22 +248,15 @@ class _ContactsPageState extends State<ContactsPage> {
 
   void handleAddContact(context) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => CriarContacto(
-                  contactos: widget.contactos,
-                ))).then((value) {
+            context, MaterialPageRoute(builder: (context) => CriarContacto()))
+        .then((value) {
       setState(() {});
     });
   }
 
   void handlePesquisar(context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => TecladoPesquisaPage(
-                  contactos: widget.contactos,
-                )));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => TecladoPesquisaPage()));
   }
 
   void handleContactsDetail(context, contactDetail) {
@@ -273,7 +265,6 @@ class _ContactsPageState extends State<ContactsPage> {
         MaterialPageRoute(
             builder: (context) => ContactoDetailsPage(
                   contactDetail: contactDetail,
-                  contactos: widget.contactos,
                 ))).then((value) {
       setState(() {});
     });

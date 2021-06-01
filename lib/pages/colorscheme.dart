@@ -34,7 +34,7 @@ class ColorSchemePage extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: () {
-                    EasyDynamicTheme.of(context).changeTheme();
+                    _data.changeTheme(0);
                   },
                   child: Container(
                     margin: EdgeInsets.only(left: 10, right: 10),
@@ -72,7 +72,9 @@ class ColorSchemePage extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _data.changeTheme(1);
+                  },
                   child: Container(
                     margin: EdgeInsets.only(left: 10, right: 10),
                     padding: EdgeInsets.all(10),

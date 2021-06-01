@@ -5,13 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TecladoItem extends StatefulWidget {
-  Contactos contactos;
   String text = "";
   double width = 0;
   bool search;
   TextEditingController controller;
-  TecladoItem(
-      {this.text, this.width, this.controller, this.search, this.contactos});
+  TecladoItem({this.text, this.width, this.controller, this.search});
 
   @override
   _TecladoItemState createState() => _TecladoItemState();
@@ -31,7 +29,6 @@ class _TecladoItemState extends State<TecladoItem> {
                   MaterialPageRoute(
                       builder: (context) => ContactsPage(
                             specificLeter: widget.text,
-                            contactos: widget.contactos,
                           )));
             }
           : () {

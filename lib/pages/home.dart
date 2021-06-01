@@ -10,6 +10,8 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:contacts_service/contacts_service.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,8 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var contactos = new Contactos();
-
   @override
   Widget build(BuildContext context) {
     DataProvider _data = Provider.of<DataProvider>(context);
@@ -72,19 +72,29 @@ class _HomePageState extends State<HomePage> {
                       primary: Theme.of(context).primaryColorDark,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15))),
-                  onPressed: () {},
+                  onPressed: () async {},
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(
-                        DateTime.now().hour.toString() +
-                            ':' +
-                            DateTime.now().minute.toString(),
-                        style: TextStyle(
-                            color: Theme.of(context).accentColor,
-                            fontSize: deviceHeight * 0.08 * _data.count,
-                            fontWeight: FontWeight.bold),
-                      ),
+                      DateTime.now().minute.toString().length < 2
+                          ? Text(
+                              DateTime.now().hour.toString() +
+                                  ':0' +
+                                  DateTime.now().minute.toString(),
+                              style: TextStyle(
+                                  color: Theme.of(context).accentColor,
+                                  fontSize: deviceHeight * 0.08 * _data.count,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          : Text(
+                              DateTime.now().hour.toString() +
+                                  ':' +
+                                  DateTime.now().minute.toString(),
+                              style: TextStyle(
+                                  color: Theme.of(context).accentColor,
+                                  fontSize: deviceHeight * 0.08 * _data.count,
+                                  fontWeight: FontWeight.bold),
+                            ),
                       Text(
                         DateTime.now().day.toString() +
                             '/' +
@@ -191,9 +201,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ChamadasNaoAtendidasPage(
-                              contactos: contactos,
-                            )));
+                        builder: (context) => ChamadasNaoAtendidasPage()));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -281,9 +289,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ContactsPage(
-                                    contactos: contactos,
-                                  )));
+                              builder: (context) => ContactsPage()));
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Theme.of(context).primaryColorDark,

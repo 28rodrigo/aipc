@@ -10,13 +10,13 @@ import 'package:aipc/pages/tecladoNumerico2.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
+import 'package:toast/toast.dart';
 
 class CriarContacto extends StatefulWidget {
-  Contactos contactos;
-
-  CriarContacto({@required this.contactos});
+  CriarContacto();
   @override
   _CriarContactoState createState() => _CriarContactoState();
 }
@@ -27,7 +27,8 @@ class _CriarContactoState extends State<CriarContacto> {
   String nome = "";
   String numero = "";
   String url = "";
-
+  var myController = TextEditingController();
+  var myControllerNumber = TextEditingController();
   File _image;
   final picker = ImagePicker();
 
@@ -44,21 +45,28 @@ class _CriarContactoState extends State<CriarContacto> {
   }
 
   Future uploadFile() async {
-    String imageName;
-    imageName = "image:" + DateTime.now().toIso8601String();
-    TaskSnapshot snapshot =
-        await storage.ref().child("Imagens/$imageName").putFile(_image);
-    if (snapshot.state == TaskState.success) {
-      setState(() async {
-        url = await snapshot.ref.getDownloadURL();
-        print(url);
-      });
+    try {
+      String imageName;
+      imageName =
+          "image:" + DateTime.now().toString().replaceAll('.', '-') + ".png";
+      TaskSnapshot snapshot =
+          await storage.ref().child("Imagens/$imageName").putFile(_image);
+      if (snapshot.state == TaskState.success) {
+        var _url = await snapshot.ref.getDownloadURL();
+        setState(() {
+          url = _url;
+          print(url);
+        });
 
-      final snackBar = SnackBar(content: Text('Yay! Successo'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    } else {
-      final snackBar = SnackBar(content: Text('Ocorreu um Erro!'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        Toast.show("Contacto criado com sucesso!", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      } else {
+        Toast.show("Erro ao criar contacto!", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      }
+    } catch (e) {
+      Toast.show("Erro ao criar contacto!", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     }
   }
 
@@ -79,6 +87,7 @@ class _CriarContactoState extends State<CriarContacto> {
     DataProvider _data = Provider.of<DataProvider>(context);
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -95,97 +104,137 @@ class _CriarContactoState extends State<CriarContacto> {
           onSwipeRight: () {
             if (_data.gesture == 1) Navigator.pop(context);
           },
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  width: deviceWidth * 0.55,
-                  height: deviceWidth * 0.55,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                          color: Theme.of(context).accentColor, width: 2)),
-                  child: TextButton(
-                    onPressed: () {
-                      getImage();
-                    },
-                    child: _image == null
-                        ? Icon(
-                            Icons.person_add_alt_1_sharp,
-                            size: deviceHeight * 0.2,
-                            color: Theme.of(context).accentColor,
-                          )
-                        : Image.file(_image),
+          child: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                    width: deviceWidth * 0.55,
+                    height: deviceWidth * 0.1,
                   ),
-                ),
-                Column(
-                  children: [
-                    Text(
-                      "NOME:",
-                      style: TextStyle(
-                          fontSize: deviceWidth * 0.1 * _data.count,
-                          fontWeight: FontWeight.w600,
-                          color: Theme.of(context).accentColor),
+                  Container(
+                    width: deviceWidth * 0.55,
+                    height: deviceWidth * 0.55,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                            color: Theme.of(context).accentColor, width: 2)),
+                    child: TextButton(
+                      onPressed: () {
+                        getImage();
+                      },
+                      child: _image == null
+                          ? Icon(
+                              Icons.person_add_alt_1_sharp,
+                              size: deviceHeight * 0.2,
+                              color: Theme.of(context).accentColor,
+                            )
+                          : Image.file(_image),
                     ),
-                    Container(
+                  ),
+                  SizedBox(
+                    width: deviceWidth * 0.55,
+                    height: deviceWidth * 0.1,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        "NOME:",
+                        style: TextStyle(
+                            fontSize: deviceWidth * 0.1 * _data.count,
+                            fontWeight: FontWeight.w600,
+                            color: Theme.of(context).accentColor),
+                      ),
+                      Container(
                         width: deviceWidth * 0.95,
                         height: deviceHeight * 0.1,
                         decoration: BoxDecoration(
                             border: Border.all(
                                 width: 2, color: Theme.of(context).accentColor),
                             borderRadius: BorderRadius.circular(10)),
-                        child: TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => TecladoPage(
-                                            setNome: setNome,
-                                          )));
-                            },
-                            child: Text(nome,
+                        child: _data.tipoTeclado == 0
+                            ? TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => TecladoPage(
+                                                setNome: setNome,
+                                              )));
+                                },
+                                child: Text(nome,
+                                    style: TextStyle(
+                                        fontSize:
+                                            deviceWidth * 0.1 * _data.count,
+                                        fontWeight: FontWeight.w600,
+                                        color: Theme.of(context).accentColor)))
+                            : TextField(
+                                controller: myController,
+                                enabled: true,
+                                textAlignVertical: TextAlignVertical.center,
+                                textAlign: TextAlign.center,
+                                decoration:
+                                    InputDecoration(border: InputBorder.none),
                                 style: TextStyle(
-                                    fontSize: deviceWidth * 0.1 * _data.count,
+                                    fontSize: 40 * _data.count,
                                     fontWeight: FontWeight.w600,
-                                    color: Theme.of(context).accentColor)))),
-                    SizedBox(
-                      height: deviceHeight * 0.065,
-                    ),
-                    Text(
-                      "NUMERO:",
-                      style: TextStyle(
-                          fontSize: deviceWidth * 0.1 * _data.count,
-                          fontWeight: FontWeight.w600,
-                          color: Theme.of(context).accentColor),
-                    ),
-                    Container(
+                                    color: Theme.of(context).accentColor),
+                              ),
+                      ),
+                      SizedBox(
+                        height: deviceHeight * 0.065,
+                      ),
+                      Text(
+                        "NUMERO:",
+                        style: TextStyle(
+                            fontSize: deviceWidth * 0.1 * _data.count,
+                            fontWeight: FontWeight.w600,
+                            color: Theme.of(context).accentColor),
+                      ),
+                      Container(
                         width: deviceWidth * 0.95,
                         height: deviceHeight * 0.1,
                         decoration: BoxDecoration(
                             border: Border.all(
                                 width: 2, color: Theme.of(context).accentColor),
                             borderRadius: BorderRadius.circular(10)),
-                        child: TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          TecladoNumerico2Page(
-                                            setNumero: setNumero,
-                                          )));
-                            },
-                            child: Text(
-                              numero,
-                              style: TextStyle(
-                                  fontSize: deviceWidth * 0.1 * _data.count,
-                                  fontWeight: FontWeight.w600,
-                                  color: Theme.of(context).accentColor),
-                            ))),
-                  ],
-                )
-              ],
+                        child: _data.tipoTeclado == 0
+                            ? TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              TecladoNumerico2Page(
+                                                setNumero: setNumero,
+                                              )));
+                                },
+                                child: Text(
+                                  numero,
+                                  style: TextStyle(
+                                      fontSize: deviceWidth * 0.1 * _data.count,
+                                      fontWeight: FontWeight.w600,
+                                      color: Theme.of(context).accentColor),
+                                ))
+                            : TextField(
+                                controller: myControllerNumber,
+                                enabled: true,
+                                keyboardType: TextInputType.number,
+                                textAlignVertical: TextAlignVertical.center,
+                                textAlign: TextAlign.center,
+                                decoration:
+                                    InputDecoration(border: InputBorder.none),
+                                style: TextStyle(
+                                    fontSize: 40 * _data.count,
+                                    fontWeight: FontWeight.w600,
+                                    color: Theme.of(context).accentColor),
+                              ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -195,22 +244,29 @@ class _CriarContactoState extends State<CriarContacto> {
           goBack: () {
             Navigator.pop(context);
           },
-          goOK: () {
-            uploadFile();
+          goOK: () async {
+            var status = await Permission.unknown.request();
+            print(status);
+            if (status.isGranted) {
+              await uploadFile();
+            }
+
+            _data.contactos.maxId++;
+            _data.contactos.contactos.add({
+              "id": _data.contactos.maxId.toString(),
+              "nome": _data.tipoTeclado == 0 ? nome : myController.text,
+              "numero":
+                  _data.tipoTeclado == 0 ? numero : myControllerNumber.text,
+              "url": _image == null
+                  ? "https://firebasestorage.googleapis.com/v0/b/aipc-e8864.appspot.com/o/Imagens%2Fdefault-user-image.png?alt=media&token=ea26f148-0f78-47b5-87f4-7e529bcee727"
+                  : url
+            });
+            _data.addContact();
             setState(() {
-              widget.contactos.maxId++;
-              widget.contactos.contactos.add({
-                "id": widget.contactos.maxId.toString(),
-                "nome": nome,
-                "numero": numero,
-                "url": _image == null
-                    ? "https://firebasestorage.googleapis.com/v0/b/aipc-e8864.appspot.com/o/Imagens%2Fdefault-user-image.png?alt=media&token=ea26f148-0f78-47b5-87f4-7e529bcee727"
-                    : url
-              });
               nome = "";
               numero = "";
-              widget.contactos.contactos.sort((a, b) =>
-                  a.values.elementAt(1).compareTo(b.values.elementAt(1)));
+              myController.text = '';
+              myControllerNumber.text = '';
             });
 
             Navigator.pop(context);

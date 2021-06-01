@@ -170,7 +170,7 @@ class _TecladoNumericoPageState extends State<TecladoNumericoPage> {
         ),
         bottomNavigationBar: BottomAppBar(
             child: NavigationTecladoPesquisa(
-          type: 2,
+          type: 1,
           goBack: () {
             Navigator.pop(context);
           },

@@ -7,12 +7,12 @@ import 'package:aipc/pages/editarcontacto.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
+import 'package:toast/toast.dart';
 
 class ContactoDetailsPage extends StatefulWidget {
   final Map<String, String> contactDetail;
-  Contactos contactos;
 
-  ContactoDetailsPage({@required this.contactDetail, @required this.contactos});
+  ContactoDetailsPage({@required this.contactDetail});
 
   @override
   _ContactoDetailsPageState createState() => _ContactoDetailsPageState();
@@ -35,6 +35,29 @@ class _ContactoDetailsPageState extends State<ContactoDetailsPage> {
                 fontSize: 40 * _data.count,
                 color: Theme.of(context).accentColor),
           ),
+          actions: [
+            IconButton(
+                icon: Icon(
+                  Icons.delete,
+                  size: deviceHeight * 0.04,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  try {
+                    _data.contactos.contactos.removeWhere((element) =>
+                        element.values.elementAt(0) ==
+                        widget.contactDetail.values.elementAt(0));
+                    _data.addContact(); //atualizar contactos
+                    Toast.show("Contacto eliminado com sucesso!", context,
+                        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                    Navigator.pop(context);
+                  } catch (e) {
+                    Toast.show("Erro a eliminar contacto!", context,
+                        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                    Navigator.pop(context);
+                  }
+                }),
+          ],
         ),
         body: SwipeDetector(
           onSwipeRight: () {
@@ -86,7 +109,6 @@ class _ContactoDetailsPageState extends State<ContactoDetailsPage> {
                             MaterialPageRoute(
                                 builder: (context) => EditarContactoPage(
                                       contactDetail: widget.contactDetail,
-                                      contactos: widget.contactos,
                                     ))).then((value) {
                           setState(() {});
                           Navigator.pop(context);
