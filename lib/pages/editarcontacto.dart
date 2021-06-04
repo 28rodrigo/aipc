@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:aipc/components/backNavigation.dart';
 import 'package:aipc/components/navigationTecladoPesquisa.dart';
 import 'package:aipc/functions/contacto_data.dart';
@@ -6,9 +8,13 @@ import 'package:aipc/pages/contactos.dart';
 import 'package:aipc/pages/home.dart';
 import 'package:aipc/pages/teclado.dart';
 import 'package:aipc/pages/tecladoNumerico2.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
+import 'package:toast/toast.dart';
 
 class EditarContactoPage extends StatefulWidget {
   final Map<String, String> contactDetail;
@@ -23,15 +29,57 @@ class _EditarContactoPageState extends State<EditarContactoPage> {
   String nome = "";
   String numero = "";
   String url = "";
+
+  var storage = FirebaseStorage.instance;
   var myController = TextEditingController();
   var myControllerNumber = TextEditingController();
   int aux = 0;
+  File _image;
+  final picker = ImagePicker();
   void setNome(_nome) {
     print(nome);
     setState(() {
       nome = _nome;
     });
     print(nome);
+  }
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future uploadFile() async {
+    try {
+      String imageName;
+      imageName =
+          "image:" + DateTime.now().toString().replaceAll('.', '-') + ".png";
+      TaskSnapshot snapshot =
+          await storage.ref().child("Imagens/$imageName").putFile(_image);
+      if (snapshot.state == TaskState.success) {
+        var _url = await snapshot.ref.getDownloadURL();
+        setState(() {
+          url = _url;
+          print(url);
+        });
+
+        Toast.show("Contacto criado com sucesso!", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      } else {
+        Toast.show("Erro ao criar contacto!", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      }
+    } catch (e) {
+      Toast.show("Erro ao criar contacto!", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+    }
   }
 
   void setNumero(_numero) {
@@ -90,14 +138,18 @@ class _EditarContactoPageState extends State<EditarContactoPage> {
                                     color: Theme.of(context).accentColor,
                                     width: 2),
                                 image: new DecorationImage(
-                                  image: NetworkImage(
-                                      widget.contactDetail.values.elementAt(3)),
+                                  image: _image == null
+                                      ? NetworkImage(widget.contactDetail.values
+                                          .elementAt(3))
+                                      : FileImage(_image),
                                   fit: BoxFit.cover,
                                 ),
                               ),
                               alignment: Alignment.topRight,
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  getImage();
+                                },
                                 child: Icon(
                                   Icons.edit,
                                   size: deviceHeight * 0.05,
@@ -244,28 +296,46 @@ class _EditarContactoPageState extends State<EditarContactoPage> {
           goBack: () {
             Navigator.pop(context);
           },
-          goOK: () {
-            // uploadFile();
-            setState(() {
-              //widget.contactos.maxId++;
-              _data.contactos.contactos.removeWhere((element) =>
-                  element.values.elementAt(0) ==
-                  widget.contactDetail.values.elementAt(0));
-
-              _data.contactos.contactos.add({
-                "id": widget.contactDetail.values.elementAt(0),
+          goOK: () async {
+            if (widget.contactDetail.values.elementAt(0) == "0112") {
+              _data.contactos.sos = {
+                "id": "0112",
                 "nome": _data.tipoTeclado == 0 ? nome : myController.text,
                 "numero":
                     _data.tipoTeclado == 0 ? numero : myControllerNumber.text,
-                "url": widget.contactDetail.values.elementAt(3)
+                "url":
+                    "https://firebasestorage.googleapis.com/v0/b/aipc-e8864.appspot.com/o/Imagens%2Fsos.png?alt=media&token=53853bfc-2da8-4663-bfb1-c7da2872f41f"
+              };
+              _data.addContact();
+            } else {
+              var status = await Permission.unknown.request();
+              print(status);
+              if (status.isGranted && _image != null) {
+                await uploadFile();
+              }
+              // uploadFile();
+              setState(() {
+                //widget.contactos.maxId++;
+                _data.contactos.contactos.removeWhere((element) =>
+                    element.values.elementAt(0) ==
+                    widget.contactDetail.values.elementAt(0));
+
+                _data.contactos.contactos.add({
+                  "id": widget.contactDetail.values.elementAt(0),
+                  "nome": _data.tipoTeclado == 0 ? nome : myController.text,
+                  "numero":
+                      _data.tipoTeclado == 0 ? numero : myControllerNumber.text,
+                  "url": _image == null
+                      ? widget.contactDetail.values.elementAt(3)
+                      : url
+                });
+                nome = "";
+                numero = "";
+                myController.text = '';
+                myControllerNumber.text = '';
+                _data.addContact();
               });
-              nome = "";
-              numero = "";
-              myController.text = '';
-              myControllerNumber.text = '';
-              _data.contactos.contactos.sort((a, b) =>
-                  a.values.elementAt(1).compareTo(b.values.elementAt(1)));
-            });
+            }
 
             Navigator.pop(context);
           },

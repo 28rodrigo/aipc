@@ -41,6 +41,7 @@ dependencies:
   contacts_service: ^0.6.1
   speech_to_text: ^2.3.0
   toast: ^0.1.5
+  flutter_launcher_icons: ^0.7.2+1
   permission_handler:
  
   
@@ -51,7 +52,10 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon.png"
 # The following section is specific to Flutter.
 flutter:
 

@@ -5,6 +5,7 @@ import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
+import 'package:toast/toast.dart';
 
 class TecladoNumericoPage extends StatefulWidget {
   final void Function(String) setNumero;
@@ -175,7 +176,11 @@ class _TecladoNumericoPageState extends State<TecladoNumericoPage> {
             Navigator.pop(context);
           },
           goOK: () {
-            callnow('tel:' + myController.text);
+            if (myController.text.isNotEmpty)
+              callnow('tel:' + myController.text);
+            else
+              Toast.show("Teclado Vazio", context,
+                  duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
           },
         )));
   }

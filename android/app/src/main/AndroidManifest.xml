@@ -2,7 +2,7 @@
     package="com.example.aipc">
    <application
         android:label="aipc"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         android:requestLegacyExternalStorage="true">
         <activity
             android:name=".MainActivity"

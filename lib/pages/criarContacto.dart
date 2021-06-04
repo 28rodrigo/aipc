@@ -247,7 +247,7 @@ class _CriarContactoState extends State<CriarContacto> {
           goOK: () async {
             var status = await Permission.unknown.request();
             print(status);
-            if (status.isGranted) {
+            if (status.isGranted && _image != null) {
               await uploadFile();
             }
 
