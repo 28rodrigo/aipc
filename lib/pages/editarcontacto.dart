@@ -1,11 +1,6 @@
 import 'dart:io';
-
-import 'package:aipc/components/backNavigation.dart';
 import 'package:aipc/components/navigationTecladoPesquisa.dart';
-import 'package:aipc/functions/contacto_data.dart';
 import 'package:aipc/functions/sizeprovider.dart';
-import 'package:aipc/pages/contactos.dart';
-import 'package:aipc/pages/home.dart';
 import 'package:aipc/pages/teclado.dart';
 import 'package:aipc/pages/tecladoNumerico2.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -146,11 +141,12 @@ class _EditarContactoPageState extends State<EditarContactoPage> {
                                 ),
                               ),
                               alignment: Alignment.topRight,
-                              child: TextButton(
+                              child: IconButton(
+                                tooltip: "Editar Fotoggrafia",
                                 onPressed: () async {
                                   getImage();
                                 },
-                                child: Icon(
+                                icon: Icon(
                                   Icons.edit,
                                   size: deviceHeight * 0.05,
                                   color: Colors.red,
@@ -199,40 +195,57 @@ class _EditarContactoPageState extends State<EditarContactoPage> {
                             fontWeight: FontWeight.w600,
                             color: Theme.of(context).accentColor),
                       ),
-                      Container(
-                        width: deviceWidth * 0.95,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 2, color: Theme.of(context).accentColor),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: _data.tipoTeclado == 0
-                            ? TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => TecladoPage(
-                                                setNome: setNome,
-                                              )));
-                                },
-                                child: Text(nome,
-                                    style: TextStyle(
-                                        fontSize:
-                                            deviceWidth * 0.1 * _data.count,
-                                        fontWeight: FontWeight.w600,
-                                        color: Theme.of(context).accentColor)))
-                            : TextField(
-                                controller: myController,
-                                enabled: true,
-                                textAlignVertical: TextAlignVertical.center,
-                                textAlign: TextAlign.center,
-                                decoration:
-                                    InputDecoration(border: InputBorder.none),
-                                style: TextStyle(
-                                    fontSize: 40 * _data.count,
-                                    fontWeight: FontWeight.w600,
-                                    color: Theme.of(context).accentColor),
-                              ),
+                      MergeSemantics(
+                        child: Container(
+                          width: deviceWidth * 0.95,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 2,
+                                  color: Theme.of(context).accentColor),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: _data.tipoTeclado == 0
+                              ? Semantics(
+                                  label: "Inserir Nome",
+                                  child: MergeSemantics(
+                                    child: TextButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      TecladoPage(
+                                                        setNome: setNome,
+                                                      )));
+                                        },
+                                        child: Text(nome,
+                                            style: TextStyle(
+                                                fontSize: deviceWidth *
+                                                    0.1 *
+                                                    _data.count,
+                                                fontWeight: FontWeight.w600,
+                                                color: Theme.of(context)
+                                                    .accentColor))),
+                                  ),
+                                )
+                              : Semantics(
+                                  label: "Inserir Nome",
+                                  child: MergeSemantics(
+                                    child: TextField(
+                                      controller: myController,
+                                      enabled: true,
+                                      textAlignVertical:
+                                          TextAlignVertical.center,
+                                      textAlign: TextAlign.center,
+                                      decoration: InputDecoration(
+                                          border: InputBorder.none),
+                                      style: TextStyle(
+                                          fontSize: 40 * _data.count,
+                                          fontWeight: FontWeight.w600,
+                                          color: Theme.of(context).accentColor),
+                                    ),
+                                  ),
+                                ),
+                        ),
                       ),
                       SizedBox(
                         height: deviceHeight * 0.065,
@@ -244,45 +257,61 @@ class _EditarContactoPageState extends State<EditarContactoPage> {
                             fontWeight: FontWeight.w600,
                             color: Theme.of(context).accentColor),
                       ),
-                      Container(
-                          width: deviceWidth * 0.95,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 2,
-                                  color: Theme.of(context).accentColor),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: _data.tipoTeclado == 0
-                              ? TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                TecladoNumerico2Page(
-                                                  setNumero: setNumero,
-                                                )));
-                                  },
-                                  child: Text(
-                                    numero,
-                                    style: TextStyle(
-                                        fontSize:
-                                            deviceWidth * 0.1 * _data.count,
-                                        fontWeight: FontWeight.w600,
-                                        color: Theme.of(context).accentColor),
-                                  ))
-                              : TextField(
-                                  controller: myControllerNumber,
-                                  enabled: true,
-                                  keyboardType: TextInputType.number,
-                                  textAlignVertical: TextAlignVertical.center,
-                                  textAlign: TextAlign.center,
-                                  decoration:
-                                      InputDecoration(border: InputBorder.none),
-                                  style: TextStyle(
-                                      fontSize: 40 * _data.count,
-                                      fontWeight: FontWeight.w600,
-                                      color: Theme.of(context).accentColor),
-                                )),
+                      MergeSemantics(
+                        child: Container(
+                            width: deviceWidth * 0.95,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 2,
+                                    color: Theme.of(context).accentColor),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: _data.tipoTeclado == 0
+                                ? Semantics(
+                                    label: "Inserir Numero",
+                                    child: MergeSemantics(
+                                      child: TextButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        TecladoNumerico2Page(
+                                                          setNumero: setNumero,
+                                                        )));
+                                          },
+                                          child: Text(
+                                            numero,
+                                            style: TextStyle(
+                                                fontSize: deviceWidth *
+                                                    0.1 *
+                                                    _data.count,
+                                                fontWeight: FontWeight.w600,
+                                                color: Theme.of(context)
+                                                    .accentColor),
+                                          )),
+                                    ),
+                                  )
+                                : Semantics(
+                                    label: "Inserir Numero",
+                                    child: MergeSemantics(
+                                      child: TextField(
+                                        controller: myControllerNumber,
+                                        enabled: true,
+                                        keyboardType: TextInputType.number,
+                                        textAlignVertical:
+                                            TextAlignVertical.center,
+                                        textAlign: TextAlign.center,
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none),
+                                        style: TextStyle(
+                                            fontSize: 40 * _data.count,
+                                            fontWeight: FontWeight.w600,
+                                            color:
+                                                Theme.of(context).accentColor),
+                                      ),
+                                    ),
+                                  )),
+                      ),
                     ],
                   )
                 ],
@@ -297,6 +326,17 @@ class _EditarContactoPageState extends State<EditarContactoPage> {
             Navigator.pop(context);
           },
           goOK: () async {
+            if ((nome == "" || numero == "") && _data.tipoTeclado == 0) {
+              Toast.show("Por Favor, preencha todos os campos!", context,
+                  duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+              return;
+            }
+            if ((myController.text == "" || myControllerNumber.text == "") &&
+                _data.tipoTeclado == 1) {
+              Toast.show("Por Favor, preencha todos os campos!", context,
+                  duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+              return;
+            }
             if (widget.contactDetail.values.elementAt(0) == "0112") {
               _data.contactos.sos = {
                 "id": "0112",

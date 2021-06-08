@@ -1,6 +1,4 @@
 import 'package:aipc/components/backNavigation.dart';
-import 'package:aipc/components/navigationTeclado.dart';
-import 'package:aipc/functions/contacto_data.dart';
 import 'package:aipc/functions/makecalls.dart';
 import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/pages/editarcontacto.dart';
@@ -37,6 +35,8 @@ class _ContactoDetailsPageState extends State<ContactoDetailsPage> {
           ),
           actions: [
             IconButton(
+                tooltip: "Eliminar Contacto:" +
+                    widget.contactDetail.values.elementAt(1),
                 icon: Icon(
                   Icons.delete,
                   size: deviceHeight * 0.04,

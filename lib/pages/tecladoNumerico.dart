@@ -61,17 +61,19 @@ class _TecladoNumericoPageState extends State<TecladoNumericoPage> {
                           color: Theme.of(context).accentColor),
                     ),
                   ),
-                  TextButton(
-                      onPressed: () {
-                        if (myController.text.length > 0)
-                          myController.text = myController.text
-                              .substring(0, myController.text.length - 1);
-                      },
-                      child: Icon(
-                        Icons.backspace,
-                        color: Theme.of(context).accentColor,
-                        size: deviceWidth * 0.1,
-                      ))
+                  IconButton(
+                    padding: EdgeInsets.all(1),
+                    icon: Icon(
+                      Icons.backspace,
+                      color: Theme.of(context).accentColor,
+                      size: deviceWidth * 0.1,
+                    ),
+                    onPressed: () {
+                      if (myController.text.length > 0)
+                        myController.text = myController.text
+                            .substring(0, myController.text.length - 1);
+                    },
+                  )
                 ],
               ),
               Row(

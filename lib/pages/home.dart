@@ -1,4 +1,3 @@
-import 'package:aipc/functions/contacto_data.dart';
 import 'package:aipc/functions/makecalls.dart';
 import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/pages/accessSettings.dart';
@@ -6,12 +5,7 @@ import 'package:aipc/pages/chamadasnaoatendidas.dart';
 import 'package:aipc/pages/contactos.dart';
 import 'package:aipc/pages/tecladoNumerico.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:intl/intl.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:contacts_service/contacts_service.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -41,6 +35,7 @@ class _HomePageState extends State<HomePage> {
                 Icons.settings,
                 size: deviceHeight * 0.04,
               ),
+              tooltip: "Settings",
               onPressed: () {
                 Navigator.push(
                     context,

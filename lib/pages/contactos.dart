@@ -3,12 +3,12 @@ import 'package:aipc/components/contactsitems.dart';
 import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/pages/contactoDetail.dart';
 import 'package:aipc/pages/criarContacto.dart';
-import 'package:aipc/pages/editarcontacto.dart';
+
 import 'package:aipc/pages/semContactos.dart';
 import 'package:aipc/pages/tecladoPesquisa.dart';
 import 'package:flutter/material.dart';
 import 'package:aipc/components/Contacts_Item.dart';
-import 'package:aipc/functions/contacto_data.dart';
+
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
 

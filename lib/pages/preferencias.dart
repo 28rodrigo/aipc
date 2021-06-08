@@ -1,11 +1,8 @@
-import 'dart:math';
-
 import 'package:aipc/components/backNavigation.dart';
 import 'package:aipc/functions/contacto_data.dart';
 import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/pages/editarcontacto.dart';
 import 'package:aipc/pages/gestos.dart';
-import 'package:aipc/pages/registoChamadas.dart';
 import 'package:aipc/pages/tipoteclado.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';

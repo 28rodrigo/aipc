@@ -1,8 +1,8 @@
-import 'package:aipc/components/Navigation.dart';
 import 'package:aipc/components/navigationTeclado.dart';
 import 'package:aipc/components/tecladoItem.dart';
 import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
@@ -10,7 +10,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class TecladoPage extends StatefulWidget {
   final void Function(String) setNome;
-  String startValue = '';
+  final String startValue;
 
   TecladoPage({this.setNome, this.startValue});
   @override
@@ -119,33 +119,42 @@ class _TecladoPageState extends State<TecladoPage> {
             children: [
               Row(
                 children: [
-                  Container(
-                    width: deviceWidth * 0.82,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 2, color: Theme.of(context).accentColor),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: TextField(
-                      controller: myController,
-                      enabled: false,
-                      decoration: InputDecoration(border: InputBorder.none),
-                      style: TextStyle(
-                          fontSize: 30 * _data.count,
-                          fontWeight: FontWeight.w600,
-                          color: Theme.of(context).accentColor),
+                  MergeSemantics(
+                    child: Container(
+                      width: deviceWidth * 0.82,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 2, color: Theme.of(context).accentColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: TextField(
+                        controller: myController,
+                        enabled: false,
+                        decoration: InputDecoration(border: InputBorder.none),
+                        style: TextStyle(
+                            fontSize: 30 * _data.count,
+                            fontWeight: FontWeight.w600,
+                            color: Theme.of(context).accentColor),
+                      ),
                     ),
                   ),
-                  TextButton(
-                      onPressed: () {
-                        if (myController.text.length > 0)
-                          myController.text = myController.text
-                              .substring(0, myController.text.length - 1);
-                      },
-                      child: Icon(
-                        Icons.backspace,
-                        color: Theme.of(context).accentColor,
-                        size: deviceWidth * 0.1,
-                      ))
+                  Semantics(
+                    label: "Eliminar Caracter",
+                    child: MergeSemantics(
+                      child: IconButton(
+                          padding: EdgeInsets.all(1),
+                          tooltip: "Eliminar Caracter",
+                          onPressed: () {
+                            if (myController.text.length > 0)
+                              myController.text = myController.text
+                                  .substring(0, myController.text.length - 1);
+                          },
+                          icon: Icon(
+                            Icons.backspace,
+                            color: Theme.of(context).accentColor,
+                            size: deviceWidth * 0.1,
+                          )),
+                    ),
+                  )
                 ],
               ),
               Row(
@@ -248,46 +257,62 @@ class _TecladoPageState extends State<TecladoPage> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                          width: deviceWidth * 0.2,
-                          height: deviceHeight * 0.2,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1,
-                                  color: Theme.of(context).accentColor),
-                              color: Theme.of(context).primaryColorDark),
-                          child: TextButton(
-                            style: ButtonStyle(alignment: Alignment.topCenter),
-                            child: Icon(
-                              Icons.arrow_upward,
-                              size: 70,
-                              color: Theme.of(context).accentColor,
-                            ),
-                            onPressed: () {
-                              _decreasePage();
-                            },
-                          )),
-                      Container(
-                          width: deviceWidth * 0.2,
-                          height: deviceHeight * 0.2,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1,
-                                  color: Theme.of(context).accentColor),
-                              color: Theme.of(context).primaryColorDark),
-                          child: TextButton(
-                            style: ButtonStyle(alignment: Alignment.topCenter),
-                            child: Icon(
-                              Icons.arrow_downward,
-                              size: 70,
-                              color: Theme.of(context).accentColor,
-                            ),
-                            onPressed: () {
-                              _increasePage();
-                            },
-                          )),
+                      MergeSemantics(
+                        child: Container(
+                            width: deviceWidth * 0.2,
+                            height: deviceHeight * 0.2,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 1,
+                                    color: Theme.of(context).accentColor),
+                                color: Theme.of(context).primaryColorDark),
+                            child: Semantics(
+                              label: "Seta para cima",
+                              child: MergeSemantics(
+                                child: TextButton(
+                                  style: ButtonStyle(
+                                      alignment: Alignment.topCenter),
+                                  child: Icon(
+                                    Icons.arrow_upward,
+                                    size: 70,
+                                    color: Theme.of(context).accentColor,
+                                  ),
+                                  onPressed: () {
+                                    _decreasePage();
+                                  },
+                                ),
+                              ),
+                            )),
+                      ),
+                      MergeSemantics(
+                        child: Container(
+                            width: deviceWidth * 0.2,
+                            height: deviceHeight * 0.2,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 1,
+                                    color: Theme.of(context).accentColor),
+                                color: Theme.of(context).primaryColorDark),
+                            child: Semantics(
+                              label: "Seta para baixo",
+                              child: MergeSemantics(
+                                child: TextButton(
+                                  style: ButtonStyle(
+                                      alignment: Alignment.topCenter),
+                                  child: Icon(
+                                    Icons.arrow_downward,
+                                    size: 70,
+                                    color: Theme.of(context).accentColor,
+                                  ),
+                                  onPressed: () {
+                                    _increasePage();
+                                  },
+                                ),
+                              ),
+                            )),
+                      ),
                     ],
                   )
                 ],

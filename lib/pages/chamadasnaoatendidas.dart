@@ -1,7 +1,5 @@
 import 'package:aipc/components/Navigation.dart';
 import 'package:aipc/components/registochamadasitem.dart';
-import 'package:aipc/functions/contacto_data.dart';
-import 'package:aipc/functions/makecalls.dart';
 import 'package:aipc/functions/sizeprovider.dart';
 import 'package:aipc/pages/contactoDetail.dart';
 import 'package:flutter/material.dart';

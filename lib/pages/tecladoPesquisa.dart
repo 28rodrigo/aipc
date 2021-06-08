@@ -1,6 +1,5 @@
 import 'package:aipc/components/Navigation.dart';
 import 'package:aipc/components/tecladoItem.dart';
-import 'package:aipc/functions/contacto_data.dart';
 import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +37,7 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
     final deviceWidth = MediaQuery.of(context).size.width;
     DataProvider _data = Provider.of<DataProvider>(context);
     //final deviceHeight = MediaQuery.of(context).size.height;
-    final myController = TextEditingController();
+    //final myController = TextEditingController();
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,

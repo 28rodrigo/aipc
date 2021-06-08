@@ -1,6 +1,6 @@
 import 'package:aipc/components/navigationTecladoPesquisa.dart';
 import 'package:aipc/components/tecladoItem.dart';
-import 'package:aipc/functions/makecalls.dart';
+
 import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +8,7 @@ import 'package:swipedetector/swipedetector.dart';
 
 class TecladoNumerico2Page extends StatefulWidget {
   final void Function(String) setNumero;
-  String startValue = "";
+  final String startValue;
 
   TecladoNumerico2Page({this.setNumero, this.startValue});
 
@@ -61,13 +61,15 @@ class _TecladoNumerico2PageState extends State<TecladoNumerico2Page> {
                           color: Theme.of(context).accentColor),
                     ),
                   ),
-                  TextButton(
+                  IconButton(
+                      padding: EdgeInsets.all(1),
+                      tooltip: "Eliminar Caracter",
                       onPressed: () {
                         if (myController.text.length > 0)
                           myController.text = myController.text
                               .substring(0, myController.text.length - 1);
                       },
-                      child: Icon(
+                      icon: Icon(
                         Icons.backspace,
                         color: Theme.of(context).accentColor,
                         size: deviceWidth * 0.1,

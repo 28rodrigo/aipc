@@ -14,55 +14,77 @@ class NavigationTeclado extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          width: deviceWidth * 0.33,
-          height: deviceHeight * 0.1,
-          decoration: BoxDecoration(
-            border: Border.all(width: 2, color: Theme.of(context).accentColor),
-            color: Theme.of(context).primaryColorDark,
-          ),
-          child: TextButton(
-            style: ButtonStyle(alignment: Alignment.topCenter),
-            child: Icon(
-              Icons.check_circle_outline_outlined,
-              size: 70,
-              color: Colors.green,
-            ),
-            onPressed: goOK,
-          ),
-        ),
-        Container(
+        MergeSemantics(
+          child: Container(
             width: deviceWidth * 0.33,
             height: deviceHeight * 0.1,
             decoration: BoxDecoration(
-                border:
-                    Border.all(width: 2, color: Theme.of(context).accentColor),
-                color: Theme.of(context).primaryColorDark),
-            child: TextButton(
-              style: ButtonStyle(alignment: Alignment.topCenter),
-              child: Icon(
-                Icons.cancel,
-                size: 70,
-                color: Colors.red[800],
+              border:
+                  Border.all(width: 2, color: Theme.of(context).accentColor),
+              color: Theme.of(context).primaryColorDark,
+            ),
+            child: Semantics(
+              label: "Confirmar",
+              child: MergeSemantics(
+                child: TextButton(
+                  style: ButtonStyle(alignment: Alignment.topCenter),
+                  child: Icon(
+                    Icons.check_circle_outline_outlined,
+                    size: 70,
+                    color: Colors.green,
+                  ),
+                  onPressed: goOK,
+                ),
               ),
-              onPressed: goBack,
-            )),
-        Container(
-            width: deviceWidth * 0.34,
-            height: deviceHeight * 0.1,
-            decoration: BoxDecoration(
-                border:
-                    Border.all(width: 2, color: Theme.of(context).accentColor),
-                color: Theme.of(context).primaryColorDark),
-            child: TextButton(
-              style: ButtonStyle(alignment: Alignment.topCenter),
-              child: Icon(
-                Icons.mic,
-                size: 70,
-                color: Theme.of(context).accentColor,
-              ),
-              onPressed: goVoice,
-            )),
+            ),
+          ),
+        ),
+        MergeSemantics(
+          child: Container(
+              width: deviceWidth * 0.33,
+              height: deviceHeight * 0.1,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      width: 2, color: Theme.of(context).accentColor),
+                  color: Theme.of(context).primaryColorDark),
+              child: Semantics(
+                label: "Cancelar",
+                child: MergeSemantics(
+                  child: TextButton(
+                    style: ButtonStyle(alignment: Alignment.topCenter),
+                    child: Icon(
+                      Icons.cancel,
+                      size: 70,
+                      color: Colors.red[800],
+                    ),
+                    onPressed: goBack,
+                  ),
+                ),
+              )),
+        ),
+        MergeSemantics(
+          child: Container(
+              width: deviceWidth * 0.34,
+              height: deviceHeight * 0.1,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      width: 2, color: Theme.of(context).accentColor),
+                  color: Theme.of(context).primaryColorDark),
+              child: Semantics(
+                label: "Microfone",
+                child: MergeSemantics(
+                  child: TextButton(
+                    style: ButtonStyle(alignment: Alignment.topCenter),
+                    child: Icon(
+                      Icons.mic,
+                      size: 70,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    onPressed: goVoice,
+                  ),
+                ),
+              )),
+        ),
       ],
     );
   }

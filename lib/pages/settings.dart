@@ -1,9 +1,7 @@
 import 'package:aipc/components/backNavigation.dart';
 import 'package:aipc/functions/sizeprovider.dart';
-import 'package:aipc/main.dart';
 import 'package:aipc/pages/about.dart';
 import 'package:aipc/pages/colorscheme.dart';
-import 'package:aipc/pages/editarcontacto.dart';
 import 'package:aipc/pages/home.dart';
 import 'package:aipc/pages/registoChamadas.dart';
 import 'package:flutter/material.dart';
@@ -74,23 +72,30 @@ class SettingsPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      width: deviceWidth * 0.2,
-                      height: deviceHeight * 0.1,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          _data.decrementCount();
-                        },
-                        child: Icon(
-                          Icons.remove,
-                          color: Theme.of(context).accentColor,
-                          size: deviceWidth * 0.1,
+                    MergeSemantics(
+                      child: SizedBox(
+                        width: deviceWidth * 0.2,
+                        height: deviceHeight * 0.1,
+                        child: Semantics(
+                          label: "Diminuir tamanho de letra",
+                          child: MergeSemantics(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                _data.decrementCount();
+                              },
+                              child: Icon(
+                                Icons.remove,
+                                color: Theme.of(context).accentColor,
+                                size: deviceWidth * 0.1,
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.grey[300],
+                                  side: BorderSide(
+                                      width: 1.5,
+                                      color: Theme.of(context).accentColor)),
+                            ),
+                          ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.grey[300],
-                            side: BorderSide(
-                                width: 1.5,
-                                color: Theme.of(context).accentColor)),
                       ),
                     ),
                     SizedBox(
@@ -112,23 +117,28 @@ class SettingsPage extends StatelessWidget {
                                 color: Theme.of(context).accentColor)),
                       ),
                     ),
-                    SizedBox(
-                      width: deviceWidth * 0.2,
-                      height: deviceHeight * 0.1,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          _data.incrementCount();
-                        },
-                        child: Icon(
-                          Icons.add,
-                          color: Theme.of(context).accentColor,
-                          size: deviceWidth * 0.1,
+                    MergeSemantics(
+                      child: SizedBox(
+                        width: deviceWidth * 0.2,
+                        height: deviceHeight * 0.1,
+                        child: Semantics(
+                          label: "Aumentar tamanho de letra",
+                          child: ElevatedButton(
+                            onPressed: () {
+                              _data.incrementCount();
+                            },
+                            child: Icon(
+                              Icons.add,
+                              color: Theme.of(context).accentColor,
+                              size: deviceWidth * 0.1,
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.grey[300],
+                                side: BorderSide(
+                                    width: 1.5,
+                                    color: Theme.of(context).accentColor)),
+                          ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.grey[300],
-                            side: BorderSide(
-                                width: 1.5,
-                                color: Theme.of(context).accentColor)),
                       ),
                     )
                   ],

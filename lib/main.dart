@@ -1,5 +1,4 @@
 import 'package:aipc/functions/sizeprovider.dart';
-import 'package:aipc/functions/themes.dart';
 import 'package:aipc/pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
