@@ -1,11 +1,12 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class ContactsItemVarios extends StatelessWidget {
   final int itemType;
   final void Function() onClick;
+
   ContactsItemVarios({@required this.itemType, @required this.onClick});
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;

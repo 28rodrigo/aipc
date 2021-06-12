@@ -1,11 +1,12 @@
-import 'package:aipc/components/backNavigation.dart';
-import 'package:aipc/functions/makecalls.dart';
-import 'package:aipc/functions/sizeprovider.dart';
-import 'package:aipc/pages/editarcontacto.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
 import 'package:toast/toast.dart';
+
+import 'package:aipc/components/backNavigation.dart';
+import 'package:aipc/functions/makecalls.dart';
+import 'package:aipc/functions/notifier.dart';
+import 'package:aipc/pages/editarcontacto.dart';
 
 class ContactoDetailsPage extends StatefulWidget {
   final Map<String, String> contactDetail;
@@ -22,6 +23,7 @@ class _ContactoDetailsPageState extends State<ContactoDetailsPage> {
     DataProvider _data = Provider.of<DataProvider>(context);
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,

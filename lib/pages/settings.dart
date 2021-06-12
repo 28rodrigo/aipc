@@ -1,13 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:swipedetector/swipedetector.dart';
+
 import 'package:aipc/components/backNavigation.dart';
-import 'package:aipc/functions/sizeprovider.dart';
+import 'package:aipc/functions/notifier.dart';
 import 'package:aipc/pages/about.dart';
 import 'package:aipc/pages/colorscheme.dart';
 import 'package:aipc/pages/home.dart';
 import 'package:aipc/pages/registoChamadas.dart';
-import 'package:flutter/material.dart';
 import 'package:aipc/pages/preferencias.dart';
-import 'package:provider/provider.dart';
-import 'package:swipedetector/swipedetector.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -15,6 +16,7 @@ class SettingsPage extends StatelessWidget {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     DataProvider _data = Provider.of<DataProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -29,6 +31,7 @@ class SettingsPage extends StatelessWidget {
         ),
       ),
       body: WillPopScope(
+          // ignore: missing_return
           onWillPop: () async {
             Future.value(false);
           },

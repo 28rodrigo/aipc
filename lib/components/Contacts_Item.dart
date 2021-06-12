@@ -1,12 +1,14 @@
-import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:aipc/functions/notifier.dart';
 
 class ContactsItem extends StatelessWidget {
   final void Function() onClick;
   final Map<String, String> contactDetail;
 
   ContactsItem({@required this.onClick, this.contactDetail});
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;

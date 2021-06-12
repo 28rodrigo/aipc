@@ -1,8 +1,9 @@
-import 'package:aipc/components/backNavigation.dart';
-import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
+
+import 'package:aipc/components/backNavigation.dart';
+import 'package:aipc/functions/notifier.dart';
 
 class GestosPage extends StatelessWidget {
   @override
@@ -10,6 +11,7 @@ class GestosPage extends StatelessWidget {
     DataProvider _data = Provider.of<DataProvider>(context);
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -53,42 +55,52 @@ class GestosPage extends StatelessWidget {
                 SizedBox(
                   width: deviceWidth * 0.9,
                   height: deviceHeight * 0.1,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      print(_data.gesture);
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      "NÃO",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: deviceWidth * 0.08 * _data.count),
+                  child: Semantics(
+                    label: _data.gesture == 0 ? "Cancelar" : "Cancelar",
+                    child: ElevatedButton(
+                      onPressed: () {
+                        print(_data.gesture);
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "NÃO",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: deviceWidth * 0.08 * _data.count),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.grey[300],
+                          side: BorderSide(width: 1.5, color: Colors.black)),
                     ),
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[300],
-                        side: BorderSide(width: 1.5, color: Colors.black)),
                   ),
                 ),
-                SizedBox(
-                  width: deviceWidth * 0.9,
-                  height: deviceHeight * 0.1,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _data.changeGesture();
-                      print(_data.gesture);
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      "SIM",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: deviceWidth * 0.08 * _data.count),
+                MergeSemantics(
+                  child: SizedBox(
+                    width: deviceWidth * 0.9,
+                    height: deviceHeight * 0.1,
+                    child: Semantics(
+                      label: _data.gesture == 0
+                          ? "Ativar gestos"
+                          : "Desativar gestos",
+                      child: ElevatedButton(
+                        onPressed: () {
+                          _data.changeGesture();
+                          print(_data.gesture);
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          "SIM",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: deviceWidth * 0.08 * _data.count),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.grey[300],
+                            side: BorderSide(width: 1.5, color: Colors.black)),
+                      ),
                     ),
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[300],
-                        side: BorderSide(width: 1.5, color: Colors.black)),
                   ),
                 )
               ],

@@ -7,10 +7,12 @@ class NavigationTeclado extends StatelessWidget {
   final void Function() goVoice;
 
   NavigationTeclado({this.goBack, this.goOK, this.goVoice});
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

@@ -8,10 +8,12 @@ class NavigationTecladoPesquisa extends StatelessWidget {
 
   NavigationTecladoPesquisa(
       {@required this.goBack, @required this.goOK, @required this.type});
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: type == 1

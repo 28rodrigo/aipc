@@ -1,6 +1,6 @@
 import 'package:aipc/components/Navigation.dart';
 import 'package:aipc/components/contactsitems.dart';
-import 'package:aipc/functions/sizeprovider.dart';
+import 'package:aipc/functions/notifier.dart';
 import 'package:aipc/pages/contactoDetail.dart';
 import 'package:aipc/pages/criarContacto.dart';
 
@@ -27,6 +27,7 @@ class _ContactsPageState extends State<ContactsPage> {
   int pageNumber = 0;
   List<Map<String, String>> contactosLetter = [];
   int numberOfPages;
+
   void _increasePage() {
     print(numberOfPages);
     print(contactos.length);
@@ -61,6 +62,7 @@ class _ContactsPageState extends State<ContactsPage> {
         .getContactos()
         .where((element) => element.values.elementAt(0) != "0")
         .toList();
+
     if (widget.specificLeter != null) {
       letter = true;
       contactos.forEach((element) {
@@ -233,7 +235,7 @@ class _ContactsPageState extends State<ContactsPage> {
         ),
         bottomNavigationBar: BottomAppBar(
             color: Colors.white,
-            child: navButtons(
+            child: NavButtons(
               goBack: () {
                 Navigator.pop(context);
               },

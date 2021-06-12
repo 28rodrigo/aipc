@@ -1,9 +1,3 @@
-import 'package:aipc/components/backNavigation.dart';
-import 'package:aipc/functions/contacto_data.dart';
-import 'package:aipc/functions/sizeprovider.dart';
-import 'package:aipc/pages/editarcontacto.dart';
-import 'package:aipc/pages/gestos.dart';
-import 'package:aipc/pages/tipoteclado.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -11,12 +5,20 @@ import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
 import 'package:toast/toast.dart';
 
+import 'package:aipc/components/backNavigation.dart';
+import 'package:aipc/functions/contacto_data.dart';
+import 'package:aipc/functions/notifier.dart';
+import 'package:aipc/pages/editarcontacto.dart';
+import 'package:aipc/pages/gestos.dart';
+import 'package:aipc/pages/tipoteclado.dart';
+
 class PreferenciasPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     DataProvider _data = Provider.of<DataProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -30,6 +32,7 @@ class PreferenciasPage extends StatelessWidget {
         ),
       ),
       body: WillPopScope(
+        // ignore: missing_return
         onWillPop: () async {
           Future.value(false);
         },

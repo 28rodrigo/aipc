@@ -1,9 +1,10 @@
-import 'package:aipc/components/Navigation.dart';
-import 'package:aipc/components/tecladoItem.dart';
-import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
+
+import 'package:aipc/components/Navigation.dart';
+import 'package:aipc/components/tecladoItem.dart';
+import 'package:aipc/functions/notifier.dart';
 
 class TecladoPesquisaPage extends StatefulWidget {
   TecladoPesquisaPage();
@@ -36,8 +37,7 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     DataProvider _data = Provider.of<DataProvider>(context);
-    //final deviceHeight = MediaQuery.of(context).size.height;
-    //final myController = TextEditingController();
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -175,7 +175,7 @@ class _TecladoPesquisaPageState extends State<TecladoPesquisaPage> {
           )),
         ),
         bottomNavigationBar: BottomAppBar(
-            child: navButtons(
+            child: NavButtons(
           goBack: () {
             Navigator.pop(context);
           },

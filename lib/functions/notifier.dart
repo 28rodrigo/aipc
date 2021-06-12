@@ -3,18 +3,25 @@ import 'package:flutter/cupertino.dart';
 
 class DataProvider extends ChangeNotifier {
   double _count = 0.8;
-  int _gesture = 0;
   double get count => _count;
+
+  int _gesture = 0;
   int get gesture => _gesture;
+
   int _importados = 0;
   int get importados => _importados;
+
   int _tipoTeclado = 0;
   int get tipoTeclado => _tipoTeclado;
+
   Contactos _contactos = new Contactos();
   Contactos get contactos => _contactos;
+
   int _theme = 0;
   int get theme => _theme;
+
   DataProvider();
+
   void addContact() {
     _contactos.contactos
         .sort((a, b) => a.values.elementAt(1).compareTo(b.values.elementAt(1)));

@@ -1,11 +1,4 @@
 import 'dart:io';
-
-import 'package:aipc/components/navigationTecladoPesquisa.dart';
-
-import 'package:aipc/functions/sizeprovider.dart';
-import 'package:aipc/pages/teclado.dart';
-
-import 'package:aipc/pages/tecladoNumerico2.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,6 +6,11 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
 import 'package:toast/toast.dart';
+
+import 'package:aipc/components/navigationTecladoPesquisa.dart';
+import 'package:aipc/functions/notifier.dart';
+import 'package:aipc/pages/teclado.dart';
+import 'package:aipc/pages/tecladoNumerico2.dart';
 
 class CriarContacto extends StatefulWidget {
   CriarContacto();
@@ -22,7 +20,6 @@ class CriarContacto extends StatefulWidget {
 
 class _CriarContactoState extends State<CriarContacto> {
   var storage = FirebaseStorage.instance;
-
   String nome = "";
   String numero = "";
   String url = "";

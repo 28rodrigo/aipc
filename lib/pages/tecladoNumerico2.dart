@@ -1,10 +1,10 @@
-import 'package:aipc/components/navigationTecladoPesquisa.dart';
-import 'package:aipc/components/tecladoItem.dart';
-
-import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
+
+import 'package:aipc/components/navigationTecladoPesquisa.dart';
+import 'package:aipc/components/tecladoItem.dart';
+import 'package:aipc/functions/notifier.dart';
 
 class TecladoNumerico2Page extends StatefulWidget {
   final void Function(String) setNumero;
@@ -21,8 +21,8 @@ class _TecladoNumerico2PageState extends State<TecladoNumerico2Page> {
   Widget build(BuildContext context) {
     DataProvider _data = Provider.of<DataProvider>(context);
     final deviceWidth = MediaQuery.of(context).size.width;
-    //final deviceHeight = MediaQuery.of(context).size.height;
     final myController = TextEditingController(text: widget.startValue);
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,

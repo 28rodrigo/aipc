@@ -1,12 +1,13 @@
-import 'package:aipc/components/navigationTeclado.dart';
-import 'package:aipc/components/tecladoItem.dart';
-import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+
+import 'package:aipc/components/navigationTeclado.dart';
+import 'package:aipc/components/tecladoItem.dart';
+import 'package:aipc/functions/notifier.dart';
 
 class TecladoPage extends StatefulWidget {
   final void Function(String) setNome;
@@ -20,6 +21,7 @@ class TecladoPage extends StatefulWidget {
 class _TecladoPageState extends State<TecladoPage> {
   stt.SpeechToText _speech;
   bool _isListening = false;
+  // ignore: unused_field
   double _confidence = 1.0;
   final int numberOfPages = 3;
   int aux = 0;
@@ -84,14 +86,13 @@ class _TecladoPageState extends State<TecladoPage> {
   @override
   Widget build(BuildContext context) {
     DataProvider _data = Provider.of<DataProvider>(context);
+    final deviceWidth = MediaQuery.of(context).size.width;
+    final deviceHeight = MediaQuery.of(context).size.height;
+
     if (aux == 0) {
       myController.text = widget.startValue;
       aux++;
     }
-
-    final deviceWidth = MediaQuery.of(context).size.width;
-    final deviceHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,

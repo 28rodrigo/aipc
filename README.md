@@ -1,16 +1,46 @@
-# aipc
+# AIPC - Aplicação de Idosos para Contactos
 
-A new Flutter project.
+Projeto no âmbito da UC de Interação Pessoa-Computador.
 
-## Getting Started
+Aplicação de Contactos desenhada tendo em mente os principios de Usabilidade e Acessibilidade.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Solução desenvolvida em Flutter.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Consulte a documentação [aqui](https://flutter.dev/docs), onde fornece tutoriais e guias simples para correr a aplicação na sua máquina !
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Este projeto está associado ao Firebase, onde são armazenadas as Imagens dos contactos.
+
+# Imagens - AIPC
+<table><tr>
+<td> 
+  <p align="center" style="padding: 10px">
+    <img alt="Forwarding" src="https://firebasestorage.googleapis.com/v0/b/aipc-e8864.appspot.com/o/Screenshot_20210612-172017.jpg?alt=media&token=09c9a712-ff0d-4fb8-bd6f-70242c12f021" width="320">
+    <br>
+    <em style="color: grey">Página Principal</em>
+  </p> 
+</td>
+<td> 
+  <p align="center">
+    <img alt="Routing" src="https://firebasestorage.googleapis.com/v0/b/aipc-e8864.appspot.com/o/Screenshot_20210612-172023.jpg?alt=media&token=a592d9f8-04cf-446f-96d9-431c825c2921" width="320">
+    <br>
+    <em style="color: grey">Teclado</em>
+  </p> 
+</td>
+</tr>
+<tr>
+<td> 
+  <p align="center">
+    <img alt="Routing" src="https://firebasestorage.googleapis.com/v0/b/aipc-e8864.appspot.com/o/Screenshot_20210612-172901.jpg?alt=media&token=c8143d32-e1da-4d0d-b83b-e955fa72b167" width="320">
+    <br>
+    <em style="color: grey">Contactos</em>
+  </p> 
+</td>
+<td> 
+  <p align="center">
+    <img alt="Routing" src="https://firebasestorage.googleapis.com/v0/b/aipc-e8864.appspot.com/o/Screenshot_20210612-172917.jpg?alt=media&token=5903d4f2-ec76-45a8-add1-687b81ac0c3e" width="320">
+    <br>
+    <em style="color: grey">Registo de chamadas</em>
+  </p> 
+</td>
+</tr></table>

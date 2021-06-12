@@ -1,13 +1,15 @@
-import 'package:aipc/components/Navigation.dart';
-import 'package:aipc/components/registochamadasitem.dart';
-import 'package:aipc/functions/sizeprovider.dart';
-import 'package:aipc/pages/contactoDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
 
+import 'package:aipc/components/Navigation.dart';
+import 'package:aipc/components/registochamadasitem.dart';
+import 'package:aipc/functions/notifier.dart';
+import 'package:aipc/pages/contactoDetail.dart';
+
 class ChamadasNaoAtendidasPage extends StatefulWidget {
   ChamadasNaoAtendidasPage();
+
   @override
   _ChamadasNaoAtendidasPageState createState() =>
       _ChamadasNaoAtendidasPageState();
@@ -15,7 +17,6 @@ class ChamadasNaoAtendidasPage extends StatefulWidget {
 
 class _ChamadasNaoAtendidasPageState extends State<ChamadasNaoAtendidasPage> {
   List<Map<String, String>> registoContactos;
-
   int pageNumber = 1;
 
   void _increasePage(int numberOfPages) {
@@ -40,6 +41,7 @@ class _ChamadasNaoAtendidasPageState extends State<ChamadasNaoAtendidasPage> {
     List<Map<String, String>> chamadasNAtendidas = [];
     DataProvider _data = Provider.of<DataProvider>(context);
     registoContactos = _data.contactos.getRegistoChamadas();
+
     registoContactos.forEach((element) {
       if (element.values.elementAt(4) == 'nAtendida') {
         chamadasNAtendidas.add(element);
@@ -48,9 +50,7 @@ class _ChamadasNaoAtendidasPageState extends State<ChamadasNaoAtendidasPage> {
     int numberOfPages = ((chamadasNAtendidas.length - 1) / 5).round();
     // ignore: unnecessary_statements
     numberOfPages == 0 ? numberOfPages++ : null;
-    print(numberOfPages);
-    // final deviceWidth = MediaQuery.of(context).size.width;
-    // final deviceHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -127,7 +127,7 @@ class _ChamadasNaoAtendidasPageState extends State<ChamadasNaoAtendidasPage> {
         ),
         bottomNavigationBar: BottomAppBar(
             color: Colors.white,
-            child: navButtons(
+            child: NavButtons(
               goBack: () {
                 Navigator.pop(context);
               },

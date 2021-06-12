@@ -1,3 +1,4 @@
+//base de dados improvisada
 class Contactos {
   int maxId = 14;
   Map<String, String> sos = {

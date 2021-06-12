@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:aipc/functions/makecalls.dart';
-import 'package:aipc/functions/sizeprovider.dart';
+import 'package:aipc/functions/notifier.dart';
 import 'package:aipc/pages/accessSettings.dart';
 import 'package:aipc/pages/chamadasnaoatendidas.dart';
 import 'package:aipc/pages/contactos.dart';
 import 'package:aipc/pages/tecladoNumerico.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _HomePageState extends State<HomePage> {
     DataProvider _data = Provider.of<DataProvider>(context);
     double deviceWidth = MediaQuery.of(context).size.width;
     double deviceHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(

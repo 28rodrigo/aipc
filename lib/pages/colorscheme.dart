@@ -1,9 +1,10 @@
-import 'package:aipc/components/backNavigation.dart';
-import 'package:aipc/functions/sizeprovider.dart';
-import 'package:aipc/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
+
+import 'package:aipc/components/backNavigation.dart';
+import 'package:aipc/functions/notifier.dart';
+import 'package:aipc/pages/home.dart';
 
 class ColorSchemePage extends StatelessWidget {
   @override
@@ -11,6 +12,7 @@ class ColorSchemePage extends StatelessWidget {
     DataProvider _data = Provider.of<DataProvider>(context);
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,

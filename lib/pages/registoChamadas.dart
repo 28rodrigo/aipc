@@ -1,23 +1,20 @@
-import 'package:aipc/components/Navigation.dart';
-import 'package:aipc/components/registochamadasitem.dart';
-import 'package:aipc/functions/contacto_data.dart';
-import 'package:aipc/functions/sizeprovider.dart';
-import 'package:aipc/pages/contactoDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
 
-class RegistoChamadasPage extends StatefulWidget {
-  //Contactos contactos;
+import 'package:aipc/components/Navigation.dart';
+import 'package:aipc/components/registochamadasitem.dart';
+import 'package:aipc/functions/contacto_data.dart';
+import 'package:aipc/functions/notifier.dart';
+import 'package:aipc/pages/contactoDetail.dart';
 
-  //RegistoChamadasPage({@required this.contactos});
+class RegistoChamadasPage extends StatefulWidget {
   @override
   _RegistoChamadasPageState createState() => _RegistoChamadasPageState();
 }
 
 class _RegistoChamadasPageState extends State<RegistoChamadasPage> {
   List<Map<String, String>> registoContactos;
-
   int pageNumber = 1;
 
   void _increasePage(int numberOfPages) {
@@ -40,15 +37,11 @@ class _RegistoChamadasPageState extends State<RegistoChamadasPage> {
   @override
   Widget build(BuildContext context) {
     registoContactos = new Contactos().getRegistoChamadas();
-
     DataProvider _data = Provider.of<DataProvider>(context);
-
     int numberOfPages = ((registoContactos.length - 1) / 5).round();
     // ignore: unnecessary_statements
     numberOfPages == 0 ? numberOfPages++ : null;
-    print(numberOfPages);
-    // final deviceWidth = MediaQuery.of(context).size.width;
-    // final deviceHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -125,7 +118,7 @@ class _RegistoChamadasPageState extends State<RegistoChamadasPage> {
         ),
         bottomNavigationBar: BottomAppBar(
             color: Colors.white,
-            child: navButtons(
+            child: NavButtons(
               goBack: () {
                 Navigator.pop(context);
               },

@@ -1,8 +1,9 @@
-import 'package:aipc/functions/sizeprovider.dart';
-import 'package:aipc/pages/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
+
+import 'package:aipc/functions/notifier.dart';
+import 'package:aipc/pages/settings.dart';
 
 class AccessSettings extends StatelessWidget {
   @override
@@ -10,6 +11,7 @@ class AccessSettings extends StatelessWidget {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     DataProvider _data = Provider.of<DataProvider>(context);
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,

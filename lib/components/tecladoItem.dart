@@ -1,13 +1,15 @@
-import 'package:aipc/functions/sizeprovider.dart';
-import 'package:aipc/pages/contactos.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:aipc/functions/notifier.dart';
+import 'package:aipc/pages/contactos.dart';
 
 class TecladoItem extends StatefulWidget {
   final String text;
   final double width;
   final bool search;
   final TextEditingController controller;
+
   TecladoItem({this.text, this.width, this.controller, this.search});
 
   @override
@@ -17,9 +19,9 @@ class TecladoItem extends StatefulWidget {
 class _TecladoItemState extends State<TecladoItem> {
   @override
   Widget build(BuildContext context) {
-    DataProvider _data = Provider.of<DataProvider>(context);
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+    DataProvider _data = Provider.of<DataProvider>(context);
     return Semantics(
       label: "Tecla " + widget.text,
       child: MergeSemantics(

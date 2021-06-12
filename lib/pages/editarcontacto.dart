@@ -1,8 +1,4 @@
 import 'dart:io';
-import 'package:aipc/components/navigationTecladoPesquisa.dart';
-import 'package:aipc/functions/sizeprovider.dart';
-import 'package:aipc/pages/teclado.dart';
-import 'package:aipc/pages/tecladoNumerico2.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,6 +6,11 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
 import 'package:toast/toast.dart';
+
+import 'package:aipc/components/navigationTecladoPesquisa.dart';
+import 'package:aipc/functions/notifier.dart';
+import 'package:aipc/pages/teclado.dart';
+import 'package:aipc/pages/tecladoNumerico2.dart';
 
 class EditarContactoPage extends StatefulWidget {
   final Map<String, String> contactDetail;
@@ -97,6 +98,7 @@ class _EditarContactoPageState extends State<EditarContactoPage> {
     }
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,

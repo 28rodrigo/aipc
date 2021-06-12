@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
 class BackNavigation extends StatelessWidget {
   final void Function() goBack;
 
   BackNavigation({@required this.goBack});
   @override
   Widget build(BuildContext context) {
-    //final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+
     return Container(
       decoration: BoxDecoration(
           border: Border.all(width: 1, color: Theme.of(context).accentColor),

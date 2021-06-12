@@ -1,8 +1,9 @@
-import 'package:aipc/components/backNavigation.dart';
-import 'package:aipc/functions/sizeprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipedetector/swipedetector.dart';
+
+import 'package:aipc/components/backNavigation.dart';
+import 'package:aipc/functions/notifier.dart';
 
 class AboutPage extends StatelessWidget {
   @override
@@ -10,6 +11,7 @@ class AboutPage extends StatelessWidget {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     DataProvider _data = Provider.of<DataProvider>(context);
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,

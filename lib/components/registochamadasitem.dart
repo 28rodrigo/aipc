@@ -5,10 +5,12 @@ class RegistoChamadaItem extends StatelessWidget {
   final void Function() goOk;
 
   RegistoChamadaItem({@required this.contactDetails, this.goOk});
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+
     return TextButton(
       onPressed: goOk,
       child: Row(
